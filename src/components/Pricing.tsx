@@ -1,7 +1,11 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Zap, Gamepad2, Server, Bot, Cpu, HardDrive, Shield, MapPin, Globe, Layers, MessageSquare, Loader2, Activity } from 'lucide-react';
+import { 
+  Check, Zap, Gamepad2, Server, Bot, 
+  Shield, MapPin, Globe, Layers, 
+  MessageSquare, Loader2, Activity, Package 
+} from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
