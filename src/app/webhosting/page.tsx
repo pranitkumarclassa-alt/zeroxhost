@@ -1,31 +1,12 @@
-'use client';
+import { Metadata } from 'next';
+import WebHostingClient from './WebHostingClient';
 
-import Navbar from '@/components/Navbar';
-import SubpageHero from '@/components/SubpageHero';
-import Pricing from '@/components/Pricing';
-import HexiumFeatures from '@/components/HexiumFeatures';
-import Footer from '@/components/Footer';
-import { Globe } from 'lucide-react';
+export const metadata: Metadata = {
+  title: "Fast Web Hosting India | cPanel & NVMe | Delhi Servers",
+  description: "Experience blazing fast web hosting in India with cPanel, free SSL, and unmetered bandwidth. Optimized for WordPress and business sites on NVMe SSD hardware.",
+  keywords: ["web hosting india", "cpanel hosting india", "cheap web hosting delhi", "fast wordpress hosting india", "nvme web hosting", "business hosting india"],
+};
 
-export default function WebHostingPage() {
-  return (
-    <main className="relative min-h-screen selection:bg-blue-500/30">
-      <Navbar />
-      
-      <div className="relative z-10">
-        <SubpageHero 
-          category="Web Hosting"
-          title="Launch your"
-          subtitle="Digital Presence"
-          description="Ultra-fast web hosting with cPanel, free SSL, and unmetered bandwidth. Optimized for speed and security."
-          icon={Globe}
-        />
-        
-        <HexiumFeatures />
-        <Pricing initialCategory="web" hideTabs={true} />
-        
-        <Footer />
-      </div>
-    </main>
-  );
+export default function Page() {
+  return <WebHostingClient />;
 }
