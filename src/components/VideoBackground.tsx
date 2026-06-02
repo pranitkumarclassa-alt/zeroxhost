@@ -6,7 +6,7 @@ export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  const [videoUrl, setVideoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4");
+  const [videoUrl, setVideoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4");
   const [hasError, setHasError] = useState(false);
 
   const handleVideoError = () => {
@@ -37,7 +37,7 @@ export default function VideoBackground() {
   }, [videoUrl, isVideoLoaded]);
 
   return (
-    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#020202]">
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#020202]">
       {/* Fallback Background Image / Gradients */}
       {hasError && (
         <div className="absolute inset-0 bg-[#020202] z-0">
@@ -63,8 +63,10 @@ export default function VideoBackground() {
             onCanPlay={() => setIsVideoLoaded(true)}
             onPlaying={() => setIsVideoLoaded(true)}
             onError={handleVideoError}
-            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-70' : 'opacity-40'} pointer-events-none`}
+            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
           >
+            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4" type="video/mp4" />
+            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website+material/video.mp4.mp4" type="video/mp4" />
             <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4" type="video/mp4" />
           </video>
         </div>

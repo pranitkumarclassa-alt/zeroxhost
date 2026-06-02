@@ -17,7 +17,7 @@ export default function Home() {
       
       <div className="relative z-10 bg-transparent">
         {/* Global background glows - Halix Style */}
-        <div className="fixed inset-0 pointer-events-none -z-5 overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
           {/* Main background - let VideoBackground handle the base color */}
           
           {/* Dynamic Glows */}
