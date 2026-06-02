@@ -5,24 +5,24 @@ import SubpageHero from '@/components/SubpageHero';
 import Pricing from '@/components/Pricing';
 import HexiumFeatures from '@/components/HexiumFeatures';
 import Footer from '@/components/Footer';
-import { Globe } from 'lucide-react';
+import { Layers } from 'lucide-react';
 
-export default function WebPage() {
+export default function VdsPage() {
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30">
       <Navbar />
       
       <div className="relative z-10">
         <SubpageHero 
-          category="Web Hosting"
-          title="Launch your"
-          subtitle="Digital Presence"
-          description="Ultra-fast web hosting with cPanel, free SSL, and unmetered bandwidth. Optimized for speed and security."
-          icon={Globe}
+          category="Dedicated Resources"
+          title="Unleash the"
+          subtitle="Power of VDS"
+          description="Dedicated virtual servers with isolated resources, enterprise-grade hardware, and full root control for demanding applications."
+          icon={Layers}
         />
         
         <HexiumFeatures />
-        <Pricing initialCategory="web" hideTabs={true} />
+        <Pricing initialCategory="vds" hideTabs={true} />
         
         <Footer />
       </div>

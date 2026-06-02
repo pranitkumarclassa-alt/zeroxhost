@@ -13,7 +13,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 const hostingDropdown = [
   { name: 'VPS Hosting', href: '/vps', icon: Server },
   { name: 'Game Servers', href: '/games', icon: Gamepad2 },
-  { name: 'VDS Hosting', href: '/vps', icon: Layers },
+  { name: 'VDS Hosting', href: '/vds', icon: Layers },
   { name: 'Web Hosting', href: '/web-hosting', icon: Globe },
   { name: 'Bot Hosting', href: '/bots', icon: Bot },
 ];
@@ -35,7 +35,7 @@ export default function Navbar() {
   const hostingServices = [
     { name: 'VPS Hosting', desc: t('nav.vpsHostingDesc'), icon: Server, href: '/vps' },
     { name: 'Game Servers', desc: t('nav.gameServersDesc'), icon: Gamepad2, href: '/games' },
-    { name: 'VDS Hosting', desc: t('nav.vdsHostingDesc'), icon: Layers, href: '/vps' },
+    { name: 'VDS Hosting', desc: t('nav.vdsHostingDesc'), icon: Layers, href: '/vds' },
     { name: 'Web Hosting', desc: t('nav.webHostingDesc'), icon: Globe, href: '/web-hosting' },
     { name: 'Bot Hosting', desc: t('nav.botHostingDesc'), icon: Bot, href: '/bots' },
     { name: 'Blog', desc: 'Hosting guides', icon: BookOpen, href: '/blog' },
