@@ -302,21 +302,21 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
                     })()}
                   </div>
                   <h3 className="text-gray-500 font-black uppercase tracking-[0.3em] text-[11px] mb-2">{tier.desc}</h3>
-                  <h4 className="text-5xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tighter">{tier.name}</h4>
+                  <h4 className="text-3xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tighter">{tier.name}</h4>
                 </div>
 
                 <div className="relative z-10 mb-12">
                   <div className="flex flex-col">
                     {tier.original_price && (
-                      <span className="text-lg font-black text-gray-600 line-through mb-1 opacity-60">
+                      <span className="text-sm font-black text-gray-600 line-through mb-1 opacity-60">
                         {formatPrice(tier.original_price)}
                       </span>
                     )}
                     <div className="flex items-baseline gap-2">
-                      <span className="text-8xl font-black text-white group-hover:text-blue-400 transition-all duration-500 tracking-tighter">
+                      <span className="text-6xl font-black text-white group-hover:text-blue-400 transition-all duration-500 tracking-tighter">
                         {formatPrice(tier.price)}
                       </span>
-                      <span className="text-gray-500 font-black text-sm uppercase tracking-widest">/mo</span>
+                      <span className="text-gray-500 font-black text-[10px] uppercase tracking-widest">/mo</span>
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
                         <div className="w-8 h-8 rounded-2xl bg-blue-600/10 flex items-center justify-center border border-blue-500/20 group-hover/item:bg-blue-600 group-hover/item:border-blue-400 transition-all duration-300">
                           <Check className="text-blue-500 group-hover/item:text-white w-4 h-4" />
                         </div>
-                        <span className="text-gray-300 font-black text-[16px] group-hover/item:text-white transition-colors">{String(value)}</span>
+                        <span className="text-gray-300 font-black text-[14px] group-hover/item:text-white transition-colors">{String(value)}</span>
                       </div>
                     );
                   })}
@@ -340,13 +340,13 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
                       <div className="w-8 h-8 rounded-2xl bg-green-500/10 flex items-center justify-center border border-green-500/20">
                         <Shield className="text-green-500 w-4 h-4" />
                       </div>
-                      <span className="text-gray-400 font-black text-[13px] uppercase tracking-widest">Advanced DDoS Shield</span>
+                      <span className="text-gray-400 font-black text-[11px] uppercase tracking-widest">Advanced DDoS Shield</span>
                     </div>
                     <div className="flex items-center gap-5">
                       <div className="w-8 h-8 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
                         <MapPin className="text-blue-500 w-4 h-4" />
                       </div>
-                      <span className="text-gray-400 font-black text-[13px] uppercase tracking-widest">India Tier-3 Node</span>
+                      <span className="text-gray-400 font-black text-[11px] uppercase tracking-widest">India Tier-3 Node</span>
                     </div>
                   </div>
                 </div>

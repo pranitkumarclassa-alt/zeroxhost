@@ -16,7 +16,7 @@ export default function AnnouncementBanner() {
         initial={{ height: 0, opacity: 0 }}
         animate={{ height: 'auto', opacity: 1 }}
         exit={{ height: 0, opacity: 0 }}
-        className="relative z-[110] overflow-hidden bg-[#020202] border-b border-white/5"
+        className="relative z-[110] overflow-hidden bg-transparent border-b border-white/5"
       >
         <div className="relative h-12 md:h-14 flex items-center justify-center px-4 overflow-hidden group">
           {/* Background Banner Image */}

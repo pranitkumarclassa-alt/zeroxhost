@@ -38,7 +38,7 @@ const benefits = [
 
 export default function ResellerBenefits() {
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-[#020202]">
+    <section className="py-24 px-6 relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.div

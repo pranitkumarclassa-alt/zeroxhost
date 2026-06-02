@@ -6,7 +6,7 @@ export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  const [videoUrl, setVideoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4");
+  const [videoUrl, setVideoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4");
   const [hasError, setHasError] = useState(false);
 
   const handleVideoError = () => {
@@ -38,36 +38,37 @@ export default function VideoBackground() {
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden bg-[#020202]">
-      {/* Fallback Background Image */}
+      {/* Fallback Background Image / Gradients */}
       {hasError && (
-        <div className="absolute inset-0 bg-[#020202]">
+        <div className="absolute inset-0 bg-[#020202] z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.1),transparent_50%)]" />
         </div>
       )}
 
       {/* The Video Layer */}
-      <div className="absolute inset-0 z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          onLoadedData={() => {
-            console.log("Video background: Data Loaded");
-            setIsVideoLoaded(true);
-          }}
-          onCanPlay={() => setIsVideoLoaded(true)}
-          onPlaying={() => setIsVideoLoaded(true)}
-          onError={handleVideoError}
-          className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-70' : 'opacity-40'} pointer-events-none`}
-        >
-          <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4" type="video/mp4" />
-          <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4" type="video/mp4" />
-        </video>
-      </div>
+      {!hasError && (
+        <div className="absolute inset-0 z-0">
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onLoadedData={() => {
+              console.log("Video background: Data Loaded");
+              setIsVideoLoaded(true);
+            }}
+            onCanPlay={() => setIsVideoLoaded(true)}
+            onPlaying={() => setIsVideoLoaded(true)}
+            onError={handleVideoError}
+            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-70' : 'opacity-40'} pointer-events-none`}
+          >
+            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
 
       {/* Halix-style Dotted Grid - Very sharp and prominent */}
       <div 

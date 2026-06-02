@@ -11,16 +11,16 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const gamesList = [
-  { name: 'Minecraft', href: '/games/minecraft', icon: Gamepad2, desc: 'High-tick Java & Bedrock hosting.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFImuEietF5qH0bg0Q6tUBbBXIbkiiYc7TXDy3XFvGk0pmM8k' },
-  { name: 'Ark: Survival', href: '/games/ark', icon: Zap, desc: 'Evolved hosting for survivors.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4W0L1P3uT0aQf4kwp1Q6W2m0Rvcy8hI-V4s' },
-  { name: 'TF2', href: '/games/team-fortress-2', icon: Shield, desc: 'Professional Team Fortress 2 nodes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wM6N7eFQw1YdDA2U6NfLh7cGHe0aIJnO4g' },
-  { name: 'Insurgency', href: '/games/insurgency', icon: Server, desc: 'Tactical servers for real combat.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh1v4L3E4aT7qN8kI9J4h6LxG7bW3oYpC6zA' },
-  { name: 'CS:GO', href: '/games/csgo', icon: Zap, desc: 'Global Offensive professional nodes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq9HgT6ZkA2mL8vN4R1Q5h7Rr7BjR4sFsN4' },
-  { name: 'Mumble', href: '/games/mumble', icon: MessageSquare, desc: 'Low-latency voice communication.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL3kN9QjT2YpM7cC1L2W4h8Jw6ZVf9tBsO3d' },
-  { name: 'GMod', href: '/games/garrys-mod', icon: Layers, desc: 'Creative sandbox hosting solutions.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7kQfX9U1FzH3pC5N0L1w6M2ZpVg2tLxO8' },
-  { name: 'Hytale', href: '/games/hytale', icon: Globe, desc: 'Next-gen adventure server hosting.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe5mV8R1F6ZxC9nB7R3J5h2K4MkE1pYyA2g' },
-  { name: 'Among Us', href: '/games/among-us', icon: Bot, desc: 'Crewmate & Impostor game nodes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx7bU3P1E9vF8dC4H2K5h1L6N8mA0pDrV3s' },
-  { name: 'GTA (FiveM)', href: '/games/gta', icon: Activity, desc: 'Multiplayer hosting for FiveM.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3kV2R8ZpC7uH4dA5L1f9N7Q0bM6pHyC4j' },
+  { name: 'Minecraft', href: '/games/minecraft', icon: Gamepad2, desc: 'High-tick Java & Bedrock hosting.', image: 'https://i.pinimg.com/originals/ab/be/8f/abbe8fde3c7ab201c38e66b03b163e2c.gif' },
+  { name: 'Ark: Survival', href: '/games/ark', icon: Zap, desc: 'Evolved hosting for survivors.', image: 'https://i.pinimg.com/736x/48/03/c7/4803c7efaecf5ce5eaf537262f38224e.jpg' },
+  { name: 'TF2', href: '/games/team-fortress-2', icon: Shield, desc: 'Professional Team Fortress 2 nodes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkwapTX38YrdFyxXC3JpJdoKksSFKxV8WZAg&s' },
+  { name: 'Insurgency', href: '/games/insurgency', icon: Server, desc: 'Tactical servers for real combat.', image: 'https://images8.alphacoders.com/126/thumb-1920-1260011.jpg' },
+  { name: 'CS:GO', href: '/games/csgo', icon: Zap, desc: 'Global Offensive professional nodes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcXJoiYWWX1kd3BWLD2Tli4FaERQ4EQrH6MQ&s' },
+  { name: 'Mumble', href: '/games/mumble', icon: MessageSquare, desc: 'Low-latency voice communication.', image: 'https://i.pinimg.com/736x/5d/62/c6/5d62c60b51108442017e9c88e1a65a96.jpg' },
+  { name: 'GMod', href: '/games/garrys-mod', icon: Layers, desc: 'Creative sandbox hosting solutions.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcnhpVGs0xbK-vwH9aT9eR0ETvhsZgMWB8XQ&s' },
+  { name: 'Hytale', href: '/games/hytale', icon: Globe, desc: 'Next-gen adventure server hosting.', image: 'https://i.pinimg.com/474x/3d/66/be/3d66be3d4706d1def5dcbd9287b82050.jpg' },
+  { name: 'Among Us', href: '/games/among-us', icon: Bot, desc: 'Crewmate & Impostor game nodes.', image: 'https://m.media-amazon.com/images/I/71h8PNvnyIL._AC_UF894,1000_QL80_.jpg' },
+  { name: 'GTA (FiveM)', href: '/games/gta', icon: Activity, desc: 'Multiplayer hosting for FiveM.', image: 'https://www.exitlag.com/blog/wp-content/uploads/2025/12/five-m-gta-lag-1024x576.webp' },
 ];
 
 export default function GamesPage() {

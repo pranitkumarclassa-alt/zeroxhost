@@ -6,11 +6,16 @@
   --background-end-rgb: 0, 0, 0;
 }
 
+html {
+  min-height: 100vh;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: transparent;
   font-family: var(--font-jakarta), sans-serif;
   scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
 @theme {

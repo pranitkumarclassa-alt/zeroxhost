@@ -228,14 +228,14 @@ export default function AdminDashboard() {
 
   if (loading || !isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#020202] flex items-center justify-center">
+      <div className="min-h-screen bg-transparent flex items-center justify-center">
         <Loader2 className="animate-spin text-blue-600" size={48} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white p-6 md:p-12 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-white p-6 md:p-12 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
