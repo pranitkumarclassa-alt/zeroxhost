@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: transparent;
+  font-family: var(--font-jakarta), sans-serif;
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --font-montserrat: var(--font-montserrat);
+  --font-jakarta: var(--font-jakarta);
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@utility animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s linear infinite;
+}
+
+@layer utilities {
+  .glow-blue {
+    box-shadow: 0 0 50px -12px rgba(37, 99, 235, 0.5);
+  }
+  .glow-blue-lg {
+    box-shadow: 0 0 80px -10px rgba(37, 99, 235, 0.6);
+  }
+  .glow-text-blue {
+    text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+  }
+  .nav-pill {
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(59,130,246,0.28), transparent 25%), radial-gradient(circle at bottom right, rgba(168,85,247,0.2), transparent 28%);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+  .nav-pill:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .nav-pill:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 5px;
+  border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
