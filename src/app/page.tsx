@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import AdvancedFeatures from '@/components/AdvancedFeatures';
 import Locations from '@/components/Locations';
+import Pricing from '@/components/Pricing';
 import Calculator from '@/components/Calculator';
 import Footer from '@/components/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
@@ -35,15 +36,6 @@ export default function Home() {
         <WhyZerox />
         <AdvancedFeatures />
         <Locations />
-        <div className="relative">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex justify-end">
-              <div className="w-full max-w-[980px]">
-                <Calculator />
-              </div>
-            </div>
-          </div>
-        </div>
         <Footer />
       </div>
     </main>

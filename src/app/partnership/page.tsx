@@ -26,7 +26,7 @@ export default function PartnershipPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen selection:bg-blue-500/30">
+    <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
       <Navbar />
       
       <div className="relative z-10">

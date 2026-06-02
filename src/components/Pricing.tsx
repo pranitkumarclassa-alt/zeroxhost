@@ -59,11 +59,41 @@ const gamesList = [
 ];
 
 const mainCategories = [
-  { id: 'games', name: 'Games', icon: Gamepad2 },
-  { id: 'web', name: 'Web', icon: Globe },
-  { id: 'vps', name: 'VPS', icon: Server },
-  { id: 'vds', name: 'VDS', icon: Layers },
-  { id: 'bots', name: 'Bots', icon: Bot },
+  { 
+    id: 'games', 
+    name: 'Games', 
+    icon: Gamepad2,
+    description: 'DOMINATE THE COMPETITION WITH OUR HIGH-TICK RATE GAME SERVERS. POWERED BY RYZEN 9 & NVME GEN4 HARDWARE FOR ZERO-LAG PERFORMANCE.',
+    banner: '🎮 MINECRAFT, ARK, CS:GO, GTA, AMONG US & MORE — ALL ON PREMIUM HARDWARE.'
+  },
+  { 
+    id: 'web', 
+    name: 'Web', 
+    icon: Globe,
+    description: 'LIGHTNING FAST WEB HOSTING SOLUTIONS POWERED BY LITESPEED & NVME SSD. PERFECT FOR PORTFOLIOS, BLOGS & BUSINESS WEBSITES.',
+    banner: '🌐 FAST, SECURE SHARED WEB HOSTING WITH CPANEL AND FREE SSL.'
+  },
+  { 
+    id: 'vps', 
+    name: 'VPS', 
+    icon: Server,
+    description: 'ENTERPRISE-GRADE VIRTUAL PRIVATE SERVERS WITH DEDICATED RESOURCES, ROOT ACCESS & ULTRA-LOW LATENCY INDIA NODES.',
+    banner: '⚡ KVM-VIRTUALIZED VPS — INTEL E5 V4 & INTEL PLATINUM 8269CY IN DELHI.'
+  },
+  { 
+    id: 'vds', 
+    name: 'VDS', 
+    icon: Layers,
+    description: 'DEDICATED SERVER PERFORMANCE WITH VPS FLEXIBILITY & 100% ISOLATED RESOURCES FOR MISSION-CRITICAL APPLICATIONS.',
+    banner: '💎 BARE-METAL PERFORMANCE WITH DEDICATED CPU CORES AND RAM.'
+  },
+  { 
+    id: 'bots', 
+    name: 'Bots', 
+    icon: Bot,
+    description: '24/7 UPTIME FOR YOUR DISCORD, TELEGRAM & WHATSAPP BOTS. EASY MANAGEMENT PANEL & INSTANT PROVISIONING.',
+    banner: '🤖 RUN DISCORD, TELEGRAM & WHATSAPP BOTS 24/7 WITH AUTO-RESTART.'
+  },
 ];
 
 interface PricingProps {
@@ -78,6 +108,8 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
   const [loading, setLoading] = useState(true);
   const { formatPrice } = useCurrency();
 
+  const currentCategoryInfo = mainCategories.find(c => c.id === activeCategory) || mainCategories[0];
+
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
@@ -88,7 +120,11 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
 
   const fetchProducts = async () => {
     try {
-      const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: true });
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .order('created_at', { ascending: false });
       if (!error && data) setDbProducts(data);
     } catch (err) {
       console.error('Error fetching products:', err);
@@ -100,12 +136,14 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
   const getTiers = () => {
     const categoryProducts = dbProducts.filter(p => p.category === activeCategory);
     
-    // If we have products in DB for this category, return them
+    // If we have products in DB for this category, return them exclusively
     if (categoryProducts.length > 0) {
       return categoryProducts.map(p => ({
+        id: p.id,
         name: p.name,
         desc: p.description,
         price: p.price,
+        original_price: p.original_price,
         featured: p.featured,
         badge: p.badge,
         game_icon: p.game_icon,
@@ -113,11 +151,13 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
       }));
     }
 
-    // Otherwise use fallback static data
+    // Only fallback if there is absolutely no data in the database for this category
+    if (loading) return []; // Don't show fallback while loading from DB
+
     switch (activeCategory) {
       case 'games': return fallbackGameTiers;
-      case 'web': return fallbackWebTiers;
       case 'vps': return fallbackVpsTiers;
+      case 'web': return fallbackWebTiers;
       case 'vds': return fallbackVdsTiers;
       case 'bots': return fallbackBotTiers;
       default: return [];
@@ -126,171 +166,200 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
 
   return (
     <section id="pricing" className="py-32 px-6 relative overflow-hidden bg-transparent">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* Background Decorative Elements - Halix Style */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none animate-pulse" />
+      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-indigo-600/10 blur-[150px] rounded-full pointer-events-none animate-pulse" />
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Banner Section - Halix Style Prominence */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="relative group overflow-hidden rounded-[2rem] bg-gradient-to-r from-blue-600/20 via-indigo-600/20 to-blue-600/20 border border-blue-500/30 p-1 backdrop-blur-3xl shadow-[0_0_50px_rgba(37,99,235,0.15)]">
+            <div className="bg-[#0a0a0a]/90 rounded-[1.9rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-indigo-600/5 pointer-events-none" />
+              <div className="flex items-center gap-6 relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(37,99,235,0.5)] group-hover:scale-110 transition-transform duration-500">
+                  <Zap size={32} className="text-white fill-white" />
+                </div>
+                <div>
+                  <h4 className="text-white font-black text-lg uppercase tracking-[0.15em] mb-1">{currentCategoryInfo.banner}</h4>
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-2 w-2 rounded-full bg-red-500 animate-ping" />
+                    <p className="text-blue-400 text-xs font-black uppercase tracking-widest">Limited Slots Available • India Node Live</p>
+                  </div>
+                </div>
+              </div>
+              <Link 
+                href="https://discord.gg/56VcDMZbrj" 
+                target="_blank"
+                className="px-10 py-4 rounded-2xl bg-blue-600 text-white font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-700 hover:scale-105 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] relative z-10 whitespace-nowrap"
+              >
+                Get Started Now
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Heading Section - Halix Style */}
         <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-[0_0_20px_rgba(37,99,235,0.1)]"
+            className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-500 text-[11px] font-black uppercase tracking-[0.3em] mb-8 shadow-[0_0_30px_rgba(37,99,235,0.15)] backdrop-blur-xl"
           >
-            Starting plans
+            <Server size={14} />
+            {activeCategory} Infrastructure
           </motion.div>
+          
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter font-montserrat"
+            className="text-6xl md:text-[90px] font-black text-white mb-8 tracking-tighter leading-[0.9] font-montserrat"
           >
-            Pick your <span className="text-blue-500">entry plan</span>
+            Power your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600">Digital World</span>
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-500 max-w-2xl mx-auto font-medium text-lg"
+            className="text-gray-400 max-w-4xl mx-auto font-black text-sm md:text-base leading-relaxed uppercase tracking-[0.1em] mb-12"
           >
-            Real lowest prices from our catalogs — Minecraft Starter, Basic cloud VPS, and Discord Mini bot hosting. Scale up anytime.
+            {currentCategoryInfo.description}
           </motion.p>
         </div>
 
-        {/* Categories Tabs - Halix Style */}
+        {/* Categories Tabs - Exactly like Halix centered pills */}
         {!hideTabs && (
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          <div className="flex flex-wrap justify-center gap-3 mb-20">
             {mainCategories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex items-center gap-3 px-8 py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.25em] transition-all ${
+                className={`flex items-center gap-4 px-10 py-5 rounded-[2rem] font-black text-[12px] uppercase tracking-[0.25em] transition-all border ${
                   activeCategory === cat.id
-                    ? 'bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] scale-105'
-                    : 'bg-white/[0.03] text-gray-500 border border-white/5 hover:bg-white/5 hover:text-white'
+                    ? 'bg-blue-600 text-white border-blue-400 shadow-[0_0_50px_rgba(37,99,235,0.4)] scale-105 z-10'
+                    : 'bg-white/[0.03] text-gray-500 border-white/10 hover:bg-white/5 hover:text-white hover:border-white/20'
                 }`}
               >
-                <cat.icon size={16} />
+                <cat.icon size={18} className={activeCategory === cat.id ? 'text-white' : 'text-blue-500'} />
                 {cat.name}
               </button>
             ))}
           </div>
         )}
 
-        {!hideTabs && activeCategory === 'games' && (
-          <div className="flex flex-wrap justify-center gap-2 mb-16 px-4">
-            {gamesList.map((game) => (
-              <button
-                key={game.name}
-                onClick={() => setActiveGame(game.name)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all border ${
-                  activeGame === game.name
-                    ? 'bg-blue-600/10 border-blue-500/50 text-blue-400'
-                    : 'bg-white/[0.02] border-white/5 text-gray-500 hover:text-gray-300'
-                }`}
-              >
-                <game.icon size={14} />
-                {game.name}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Tiers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[400px]">
+        {/* Pricing Cards - Halix Style Vertical Power Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {loading ? (
-            <div className="col-span-full flex items-center justify-center">
-              <Loader2 className="animate-spin text-blue-500" size={48} />
-            </div>
-          ) : getTiers().length === 0 ? (
-            <div className="col-span-full text-center p-20 bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/5">
-              <h3 className="text-2xl font-black text-white mb-2">No plans available yet</h3>
-              <p className="text-gray-500 font-medium">We are currently updating our offerings for this category.</p>
+            <div className="col-span-full py-40 flex flex-col items-center justify-center">
+              <Loader2 className="animate-spin text-blue-600 mb-6" size={80} />
+              <p className="text-gray-500 font-black uppercase tracking-[0.5em] text-[10px]">Synchronizing Nodes...</p>
             </div>
           ) : (
             getTiers().map((tier, index) => (
               <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ 
-                  duration: 0.7, 
-                  delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className={`relative p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col border transition-all duration-500 group overflow-hidden ${
+                key={tier.id || tier.name}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className={`relative flex flex-col p-12 rounded-[4rem] border transition-all duration-700 group overflow-hidden ${
                   tier.featured 
-                    ? 'bg-gradient-to-br from-blue-600/20 to-blue-600/5 border-blue-500/50 shadow-[0_0_80px_rgba(37,99,235,0.25)] backdrop-blur-3xl' 
-                    : 'bg-white/[0.02] backdrop-blur-3xl border-white/10 hover:border-blue-500/50 hover:bg-white/[0.04] hover:shadow-[0_0_50px_rgba(37,99,235,0.15)]'
+                    ? 'bg-gradient-to-br from-blue-600/30 via-[#0a0a0a]/40 to-[#0a0a0a]/40 border-blue-500 shadow-[0_40px_120px_rgba(37,99,235,0.3)] scale-105 z-20' 
+                    : 'bg-[#0a0a0a]/40 backdrop-blur-xl border-white/10 hover:border-blue-500/50 hover:bg-[#0a0a0a]/60'
                 }`}
               >
-                {/* Background Glow */}
-                <div className={`absolute -top-24 -right-24 w-48 h-48 blur-[60px] rounded-full transition-all duration-700 ${
-                  tier.featured ? 'bg-blue-500/30' : 'bg-blue-500/5 opacity-0 group-hover:opacity-100 group-hover:scale-125'
+                {/* Internal Card Glow */}
+                <div className={`absolute -top-24 -right-24 w-64 h-64 blur-[100px] rounded-full transition-all duration-1000 ${
+                  tier.featured ? 'bg-blue-600/40' : 'bg-blue-600/5 group-hover:bg-blue-600/20'
                 }`} />
 
                 {tier.badge && (
-                  <div className="absolute top-6 right-8 px-4 py-1.5 rounded-full bg-blue-600 text-white text-[9px] font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(37,99,235,0.5)] z-10 animate-pulse">
+                  <div className="absolute top-8 right-10 px-6 py-2 rounded-full bg-blue-600 text-white text-[9px] font-black uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(37,99,235,0.5)] z-30">
                     {tier.badge}
                   </div>
                 )}
 
-                <div className="mb-8 text-left relative z-10">
-                  <h3 className="text-gray-400 font-black uppercase tracking-[0.2em] text-[9px] mb-2 font-jakarta">{tier.desc}</h3>
-                  <h4 className="text-3xl font-black text-white group-hover:text-blue-400 transition-colors drop-shadow-md font-montserrat">{tier.name}</h4>
+                <div className="relative z-10 mb-12">
+                  <div className="w-20 h-20 rounded-3xl bg-blue-600/10 flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 group-hover:bg-blue-600/20 transition-all duration-500">
+                    {(() => {
+                      const Icon = currentCategoryInfo.icon || Package;
+                      return <Icon size={40} className="text-blue-500" />;
+                    })()}
+                  </div>
+                  <h3 className="text-gray-500 font-black uppercase tracking-[0.3em] text-[11px] mb-2">{tier.desc}</h3>
+                  <h4 className="text-5xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tighter">{tier.name}</h4>
                 </div>
 
-                <div className="flex flex-col gap-2 mb-8 relative z-10">
-                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">FROM</div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-6xl font-black text-white group-hover:text-blue-400 transition-all duration-300 drop-shadow-lg group-hover:scale-105 origin-left">
-                      {formatPrice(tier.price)}
-                    </span>
-                    <span className="text-gray-500 font-black text-xs uppercase tracking-widest">/month</span>
+                <div className="relative z-10 mb-12">
+                  <div className="flex flex-col">
+                    {tier.original_price && (
+                      <span className="text-lg font-black text-gray-600 line-through mb-1 opacity-60">
+                        {formatPrice(tier.original_price)}
+                      </span>
+                    )}
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-8xl font-black text-white group-hover:text-blue-400 transition-all duration-500 tracking-tighter">
+                        {formatPrice(tier.price)}
+                      </span>
+                      <span className="text-gray-500 font-black text-sm uppercase tracking-widest">/mo</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-10 flex-grow text-left relative z-10">
+                <div className="relative z-10 space-y-6 flex-grow mb-12">
                   {Object.entries(tier).map(([key, value]) => {
-                    if (['name', 'desc', 'price', 'featured', 'badge', 'game_icon'].includes(key)) return null;
+                    if (['id', 'name', 'desc', 'price', 'featured', 'badge', 'game_icon', 'original_price', 'category', 'display_order', 'created_at'].includes(key)) return null;
                     return (
-                      <div key={key} className="flex items-center gap-4 group/item">
-                        <div className="w-6 h-6 rounded-xl bg-blue-600/10 flex items-center justify-center group-hover:bg-blue-600/20 transition-all border border-blue-500/10 group-hover/item:scale-110">
-                          <Check className="text-blue-500 w-3.5 h-3.5" />
+                      <div key={key} className="flex items-center gap-5 group/item">
+                        <div className="w-8 h-8 rounded-2xl bg-blue-600/10 flex items-center justify-center border border-blue-500/20 group-hover/item:bg-blue-600 group-hover/item:border-blue-400 transition-all duration-300">
+                          <Check className="text-blue-500 group-hover/item:text-white w-4 h-4" />
                         </div>
-                        <span className="text-gray-300 font-bold text-[14px] drop-shadow-sm group-hover/item:text-white transition-colors">{String(value)}</span>
+                        <span className="text-gray-300 font-black text-[16px] group-hover/item:text-white transition-colors">{String(value)}</span>
                       </div>
                     );
                   })}
-                  <div className="flex items-center gap-3 group/item">
-                    <div className="w-5 h-5 rounded-full bg-blue-600/10 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                      <Check className="text-blue-500 w-3 h-3" />
+                  
+                  {/* Default Performance Specs */}
+                  <div className="pt-6 border-t border-white/5 space-y-6">
+                    <div className="flex items-center gap-5">
+                      <div className="w-8 h-8 rounded-2xl bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                        <Shield className="text-green-500 w-4 h-4" />
+                      </div>
+                      <span className="text-gray-400 font-black text-[13px] uppercase tracking-widest">Advanced DDoS Shield</span>
                     </div>
-                    <span className="text-gray-400 font-bold text-[13px] group-hover/item:text-gray-300 transition-colors">DDoS Protection</span>
-                  </div>
-                  <div className="flex items-center gap-3 group/item">
-                    <div className="w-5 h-5 rounded-full bg-blue-600/10 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                      <Check className="text-blue-500 w-3 h-3" />
+                    <div className="flex items-center gap-5">
+                      <div className="w-8 h-8 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+                        <MapPin className="text-blue-500 w-4 h-4" />
+                      </div>
+                      <span className="text-gray-400 font-black text-[13px] uppercase tracking-widest">India Tier-3 Node</span>
                     </div>
-                    <span className="text-gray-400 font-bold text-[13px] group-hover/item:text-gray-300 transition-colors">Delhi, India Node</span>
                   </div>
                 </div>
 
                 <Link
                   href="https://discord.gg/56VcDMZbrj"
                   target="_blank"
-                  className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] text-center transition-all duration-300 relative z-10 ${
+                  className={`relative z-10 w-full py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.3em] text-center transition-all duration-500 overflow-hidden ${
                     tier.featured
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-[1.02] active:scale-[0.98]'
-                      : 'bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-blue-500/50 hover:scale-[1.02] active:scale-[0.98]'
+                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:scale-[1.05] active:scale-[0.98]'
+                      : 'bg-white/5 text-white hover:bg-blue-600 border border-white/10 hover:border-blue-400 hover:scale-[1.05] active:scale-[0.98]'
                   }`}
                 >
-                  Buy Now
+                  <span className="relative z-10">Configure Now</span>
+                  {tier.featured && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+                  )}
                 </Link>
               </motion.div>
             ))

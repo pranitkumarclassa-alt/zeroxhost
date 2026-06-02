@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Fix Turbopack root directory warning
+  turbopack: {
+    root: process.cwd(),
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
@@ -28,12 +37,6 @@ const nextConfig: NextConfig = {
         hostname: 'encrypted-tbn0.gstatic.com',
       },
     ],
-  },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-      allowedOrigins: ['localhost:3000'],
-    },
   },
 };
 

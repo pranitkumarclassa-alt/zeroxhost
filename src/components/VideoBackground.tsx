@@ -15,14 +15,26 @@ export default function VideoBackground() {
   };
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.8;
-      videoRef.current.play().catch(err => {
-        console.warn("Autoplay failed, trying again...", err);
-        // Some browsers need a second attempt or a user gesture
-      });
-    }
-  }, [videoUrl]);
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.playbackRate = 0.8;
+        videoRef.current.play().catch(err => {
+          console.warn("Autoplay failed, retrying on interaction...", err);
+        });
+      }
+    };
+
+    playVideo();
+    
+    // Ensure video keeps playing and loops correctly
+    const interval = setInterval(() => {
+      if (videoRef.current && videoRef.current.paused && isVideoLoaded) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [videoUrl, isVideoLoaded]);
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden bg-[#020202]">

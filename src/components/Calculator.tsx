@@ -22,7 +22,7 @@ export default function Calculator() {
   }, [ram, cpu, ssd]);
 
   return (
-    <section id="calculator" className="py-24 px-6 relative overflow-hidden">
+    <section id="calculator" className="py-24 px-6 relative overflow-hidden bg-transparent">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <motion.div

@@ -38,7 +38,7 @@ const advancedFeatures = [
 
 export default function AdvancedFeatures() {
   return (
-    <section className="py-24 px-6 relative">
+    <section className="py-24 px-6 relative bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <motion.div

@@ -7,14 +7,8 @@ const initializeSupabase = () => {
     return supabaseInstance;
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error(
-      'Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and either NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY.'
-    );
-  }
+  const supabaseUrl = 'https://lylvdeeorhjxevbdlqhm.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bHZkZWVvcmhqeGV2YmRscWhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyOTEzNDUsImV4cCI6MjA5NTg2NzM0NX0.5xzVl-zz_4SjJuljDqQMp2IcfnUDlb1kEO1IdQw-C3Y';
 
   supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
   return supabaseInstance;

@@ -10,17 +10,12 @@ import { cn } from '@/lib/utils';
 import { useCurrency } from '@/lib/CurrencyContext';
 import { useLanguage } from '@/lib/LanguageContext';
 
-const gamesDropdown = [
-  { name: 'Minecraft', href: '/games/minecraft' },
-  { name: 'Ark: Survival', href: '/games/ark' },
-  { name: 'TF2', href: '/games/team-fortress-2' },
-  { name: 'Insurgency', href: '/games/insurgency' },
-  { name: 'CS:GO', href: '/games/csgo' },
-  { name: 'Mumble', href: '/games/mumble' },
-  { name: 'GMod', href: '/games/garrys-mod' },
-  { name: 'Hytale', href: '/games/hytale' },
-  { name: 'Among Us', href: '/games/among-us' },
-  { name: 'GTA (FiveM)', href: '/games/gta' },
+const hostingDropdown = [
+  { name: 'VPS Hosting', href: '/vps', icon: Server },
+  { name: 'Game Servers', href: '/games', icon: Gamepad2 },
+  { name: 'VDS Hosting', href: '/vps', icon: Layers },
+  { name: 'Web Hosting', href: '/web-hosting', icon: Globe },
+  { name: 'Bot Hosting', href: '/bots', icon: Bot },
 ];
 
 export default function Navbar() {
@@ -38,11 +33,11 @@ export default function Navbar() {
   }, []);
 
   const hostingServices = [
-    { name: t('nav.games'), desc: t('nav.gameServersDesc'), icon: Gamepad2, href: '/games' },
-    { name: t('nav.web'), desc: t('nav.webHostingDesc'), icon: Globe, href: '/web' },
-    { name: t('nav.vps'), desc: t('nav.vpsHostingDesc'), icon: Server, href: '/vps' },
-    { name: 'VDS', desc: t('nav.vdsHostingDesc'), icon: Layers, href: '/vps' },
-    { name: t('nav.bots'), desc: t('nav.botHostingDesc'), icon: Bot, href: '/bots' },
+    { name: 'VPS Hosting', desc: t('nav.vpsHostingDesc'), icon: Server, href: '/vps' },
+    { name: 'Game Servers', desc: t('nav.gameServersDesc'), icon: Gamepad2, href: '/games' },
+    { name: 'VDS Hosting', desc: t('nav.vdsHostingDesc'), icon: Layers, href: '/vps' },
+    { name: 'Web Hosting', desc: t('nav.webHostingDesc'), icon: Globe, href: '/web-hosting' },
+    { name: 'Bot Hosting', desc: t('nav.botHostingDesc'), icon: Bot, href: '/bots' },
     { name: 'Blog', desc: 'Hosting guides', icon: BookOpen, href: '/blog' },
   ];
 
@@ -62,6 +57,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const navItems = [
+    { name: 'Pricing', href: '/pricing', icon: Activity },
+    { name: 'Deals', href: '/pricing?category=deals', icon: Activity },
+    { name: 'Partners', href: '/partnership', icon: Handshake },
     { name: t('nav.vps'), href: '/vps', icon: Server },
     { name: t('nav.bots'), href: '/bots', icon: Bot },
     { name: 'Blog', href: '/blog', icon: BookOpen },
@@ -89,8 +87,8 @@ export default function Navbar() {
           )}
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-10 w-10 rounded-xl overflow-hidden group-hover:scale-110 transition-all duration-500">
+          <Link href="/" className="flex items-center gap-4 group">
+            <div className="relative h-12 w-12 rounded-2xl overflow-hidden group-hover:scale-110 transition-all duration-500 border border-white/10 group-hover:border-blue-500/50">
               <Image
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
                 alt="Zerox Host"
@@ -99,41 +97,55 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-black text-white tracking-tighter leading-tight font-montserrat">ZEROX<span className="text-blue-500">HOST</span></span>
-              <span className="text-[8px] font-black text-gray-500 uppercase tracking-[0.2em] leading-none font-jakarta">Hosting built for builders</span>
+              <span className="text-2xl font-black text-white tracking-tighter leading-tight font-montserrat uppercase">ZEROX<span className="text-blue-500">HOST</span></span>
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.3em] leading-none font-jakarta">Supreme Infrastructure</span>
             </div>
           </Link>
 
           {/* Centered Nav Links */}
-          <div className="hidden lg:flex flex-wrap items-center gap-3 min-w-0">
+          <div className="hidden lg:flex items-center gap-3 min-w-0 flex-nowrap">
             <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('games')}
+              className="relative group/hosting h-full flex items-center"
+              onMouseEnter={() => setActiveDropdown('hosting')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-xs font-black uppercase tracking-[0.28em] text-gray-300 transition-all duration-300 hover:border-blue-400/50 hover:text-white hover:bg-white/10 shadow-[0_0_10px_rgba(37,99,235,0.08)]">
-                <Gamepad2 size={14} className="text-blue-500" /> {t('nav.games')} <ChevronDown size={12} className={cn("transition-transform duration-300", activeDropdown === 'games' && "rotate-180")} />
+              <button className={cn(
+                "flex items-center gap-2 rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
+                activeDropdown === 'hosting' 
+                  ? "bg-blue-600/20 border-blue-500/50 text-white shadow-[0_0_20px_rgba(37,99,235,0.2)]" 
+                  : "bg-white/5 border-white/10 text-gray-300 hover:border-blue-400/50 hover:text-white hover:bg-white/10"
+              )}>
+                <Server size={12} className="text-blue-500" /> Hosting Services <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'hosting' && "rotate-180")} />
               </button>
+              
               <AnimatePresence>
-                {activeDropdown === 'games' && (
+                {activeDropdown === 'hosting' && (
                   <motion.div
                     initial={{ opacity: 0, y: 12, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[520px] bg-[#05050a]/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-6 shadow-[0_25px_80px_rgba(0,0,0,0.45)] grid grid-cols-2 gap-3"
+                    className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[520px] z-[110]"
                   >
-                    {gamesDropdown.map((game) => (
-                      <Link
-                        key={game.name}
-                        href={game.href}
-                        className="flex items-center gap-3 p-4 rounded-3xl bg-white/5 border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/20"
-                      >
-                        <div className="w-10 h-10 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-400">
-                          <Gamepad2 size={16} />
-                        </div>
-                        <span className="text-[11px] font-black uppercase tracking-[0.25em] text-white">{game.name}</span>
-                      </Link>
-                    ))}
+                    <div className="bg-[#05050a]/95 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.6)] grid grid-cols-2 gap-4 relative">
+                      {/* Decorative Glow inside dropdown */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+                      
+                      {hostingDropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="flex items-center gap-4 p-5 rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/30 group/item"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:scale-110 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
+                            <item.icon size={20} />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">{item.name}</span>
+                            <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-0.5 group-hover/item:text-blue-400/70 transition-colors">Enterprise Grade</span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -146,26 +158,28 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "group relative overflow-hidden rounded-full px-5 py-3 text-xs font-black uppercase tracking-[0.26em] transition-all duration-300 nav-pill",
-                    active ? 'text-white bg-white/10 border border-blue-400/30 shadow-[0_0_25px_rgba(56,189,248,0.18)]' : 'text-gray-300 hover:text-white hover:bg-white/5 hover:border hover:border-white/10'
+                    "group relative overflow-hidden rounded-full px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 nav-pill",
+                    active 
+                      ? 'text-white bg-blue-600/20 border border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.25)]' 
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/20 border border-transparent'
                   )}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-violet-500/10 to-cyan-400/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-violet-500/5 to-cyan-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span className="relative z-10 flex items-center gap-2">
-                    <item.icon size={14} className="text-blue-400" /> {item.name}
+                    <item.icon size={14} className={cn("transition-colors duration-300", active ? "text-blue-400" : "text-gray-500 group-hover:text-blue-400")} /> {item.name}
                   </span>
                 </Link>
               );
             })}
 
-            <div className="w-px h-6 bg-white/10 mx-2" />
-            <Link href="https://status.zeroxhost.space" target="_blank" rel="noreferrer noopener" className="relative overflow-hidden rounded-full px-5 py-3 text-xs font-black uppercase tracking-[0.26em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+            <div className="w-px h-6 bg-white/10 mx-1" />
+            <Link href="https://status.zeroxhost.space" target="_blank" rel="noreferrer noopener" className="relative overflow-hidden rounded-full px-3 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
               <span className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-violet-500/10 to-cyan-400/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="relative z-10 flex items-center gap-2"><Activity size={14} className="text-blue-400" /> Live Status</span>
+              <span className="relative z-10 flex items-center gap-2"><Activity size={12} className="text-blue-400" /> Live Status</span>
             </Link>
-            <Link href={legalLink.href} className="relative overflow-hidden rounded-full px-5 py-3 text-xs font-black uppercase tracking-[0.26em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+            <Link href={legalLink.href} className="relative overflow-hidden rounded-full px-3 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
               <span className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-violet-500/10 to-cyan-400/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="relative z-10 flex items-center gap-2"><FileText size={14} className="text-blue-400" /> {legalLink.name}</span>
+              <span className="relative z-10 flex items-center gap-2"><FileText size={12} className="text-blue-400" /> {legalLink.name}</span>
             </Link>
           </div>
 
@@ -176,99 +190,102 @@ export default function Navbar() {
                 <MessageSquare size={18} />
               </Link>
 
-              {/* Language Switcher (Desktop) */}
-              <div className="relative">
-                <button
-                  onClick={() => setActiveDropdown(activeDropdown === 'lang' ? null : 'lang')}
-                  className="flex items-center gap-1.5 text-xs font-black text-gray-300 hover:text-white transition-all uppercase"
+              {/* Language & Currency in one sleek group */}
+              <div className="flex items-center gap-3 bg-white/5 border border-white/5 rounded-2xl px-4 py-2">
+                {/* Language Switcher */}
+                <div 
+                  className="relative group/lang"
+                  onMouseEnter={() => setActiveDropdown('lang')}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  <span className="text-lg">{languages.find(l => l.code === language)?.flag ?? '🇺🇸'}</span>
-                  <ChevronDown size={12} />
-                </button>
+                  <button
+                    className="flex items-center gap-1.5 text-[10px] font-black text-gray-300 hover:text-white transition-all uppercase tracking-widest py-1"
+                  >
+                    <span>{languages.find(l => l.code === language)?.code.toUpperCase()}</span>
+                    <ChevronDown size={10} className="text-blue-500" />
+                  </button>
 
-                {/* Desktop language dropdown */}
-                <AnimatePresence>
-                  {activeDropdown === 'lang' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      className="absolute right-0 mt-2 w-40 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-xl p-3 shadow-2xl"
-                    >
-                      <div className="grid grid-cols-1 gap-2">
-                        {languages.map((lang) => (
-                          <button
-                            key={lang.code}
-                            onClick={() => { setLanguage(lang.code); setActiveDropdown(null); }}
-                            className={cn(
-                              "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-bold transition-all text-left",
-                              language === lang.code ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                            )}
-                          >
-                            <span className="text-lg">{lang.flag}</span>
-                            <span className="uppercase">{lang.code}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                  <AnimatePresence>
+                    {activeDropdown === 'lang' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute right-0 top-full pt-4 w-40 z-[110]"
+                      >
+                        <div className="bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-2xl p-3 shadow-2xl">
+                          {languages.map((lang) => (
+                            <button
+                              key={lang.code}
+                              onClick={() => { setLanguage(lang.code); setActiveDropdown(null); }}
+                              className={cn(
+                                "flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-[10px] font-black transition-all mb-1 uppercase tracking-widest",
+                                language === lang.code ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                              )}
+                            >
+                              <span>{lang.label}</span>
+                              <span>{lang.flag}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-              {/* Currency Switcher (Desktop) */}
-              <div className="relative">
-                <button
-                  onClick={() => setActiveDropdown(activeDropdown === 'currency' ? null : 'currency')}
-                  className="flex items-center gap-1.5 text-xs font-black text-gray-300 hover:text-white transition-all uppercase"
+                <div className="w-px h-3 bg-white/10" />
+
+                {/* Currency Switcher */}
+                <div 
+                  className="relative group/curr"
+                  onMouseEnter={() => setActiveDropdown('currency')}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {currency}
-                  <ChevronDown size={12} />
-                </button>
+                  <button
+                    className="flex items-center gap-1.5 text-[10px] font-black text-gray-300 hover:text-white transition-all uppercase tracking-widest py-1"
+                  >
+                    <span>{currency}</span>
+                    <ChevronDown size={10} className="text-blue-500" />
+                  </button>
 
-                <AnimatePresence>
-                  {activeDropdown === 'currency' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      className="absolute right-0 mt-2 w-32 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-xl p-3 shadow-2xl"
-                    >
-                      <div className="grid grid-cols-1 gap-2">
-                        {(['INR','USD'] as const).map((c) => (
-                          <button
-                            key={c}
-                            onClick={() => { setCurrency(c); setActiveDropdown(null); }}
-                            className={cn(
-                              "px-3 py-2 rounded-lg text-sm font-bold transition-all text-left",
-                              currency === c ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                            )}
-                          >
-                            {c}
-                          </button>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  <AnimatePresence>
+                    {activeDropdown === 'currency' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute right-0 top-full pt-4 w-32 z-[110]"
+                      >
+                        <div className="bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-2xl p-3 shadow-2xl">
+                          {(['INR','USD'] as const).map((c) => (
+                            <button
+                              key={c}
+                              onClick={() => { setCurrency(c); setActiveDropdown(null); }}
+                              className={cn(
+                                "w-full px-4 py-2.5 rounded-xl text-[10px] font-black transition-all mb-1 uppercase tracking-widest",
+                                currency === c ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                              )}
+                            >
+                              {c}
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Link
-                href="/contact"
-                className="px-6 py-2 rounded-xl border border-white/10 text-white text-[10px] font-black uppercase tracking-widest transition-all hover:bg-white/5"
-              >
-                Talk to Sales
-              </Link>
+            <div className="flex items-center gap-4">
               <Link
                 href="https://discord.com/invite/56VcDMZbrj"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="px-6 py-2 rounded-xl bg-[#a855f7] text-white text-[10px] font-black uppercase tracking-widest transition-all hover:bg-[#9333ea] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                className="px-8 py-3 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-blue-700 shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-105 active:scale-95"
               >
-                Billing Portal
+                Client Area
               </Link>
-              <Link href="/partnership" className="ml-2 text-xs font-bold uppercase text-gray-300 hover:text-white">{t('nav.partnership')}</Link>
             </div>
           </div>
 
@@ -304,6 +321,28 @@ export default function Navbar() {
                     >
                       <service.icon size={20} className="text-blue-500" />
                       <span className="text-sm font-bold text-white uppercase tracking-wider">{service.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-6 ml-2">Explore</div>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { name: 'Pricing', href: '/pricing', icon: Activity },
+                    { name: 'Deals', href: '/pricing?category=deals', icon: Zap },
+                    { name: 'Partners', href: '/partners', icon: Handshake },
+                    { name: 'Blog', href: '/blog', icon: BookOpen },
+                  ].map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon size={20} className="text-blue-500" />
+                      <span className="text-sm font-bold text-white uppercase tracking-wider">{item.name}</span>
                     </Link>
                   ))}
                 </div>
