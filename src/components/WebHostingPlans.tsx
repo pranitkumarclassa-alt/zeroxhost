@@ -33,7 +33,7 @@ export default function WebHostingPlans() {
             </ul>
 
             <div className="flex gap-3">
-              <Link href={`/web-hosting#${plan.id}`} className="px-4 py-2 rounded-lg bg-transparent border border-white/10 text-white text-sm font-bold hover:bg-white/5">Details</Link>
+              <Link href={`/webhosting#${plan.id}`} className="px-4 py-2 rounded-lg bg-transparent border border-white/10 text-white text-sm font-bold hover:bg-white/5">Details</Link>
               <Link href="#calculator" className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-500">Calculate</Link>
             </div>
           </div>

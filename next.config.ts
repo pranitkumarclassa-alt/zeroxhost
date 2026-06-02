@@ -58,6 +58,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: '/web',
+        destination: '/webhosting',
+        permanent: true,
+      },
+      {
+        source: '/web-hosting',
+        destination: '/webhosting',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
