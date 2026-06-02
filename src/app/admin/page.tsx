@@ -246,32 +246,45 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-white p-6 md:p-12 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
+    <div className="min-h-screen bg-transparent text-white p-6 md:p-12 relative overflow-hidden selection:bg-blue-500/30">
+      {/* Dynamic Background Overlays for Aesthetic Depth */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.03)_0%,transparent_70%)]" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16">
+        {/* Header - More Aesthetic Glassmorphism */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16 bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+        >
           <div className="flex items-center gap-6">
-            <div className="relative h-20 w-20 rounded-[2rem] border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(37,99,235,0.2)] bg-black/50 backdrop-blur-xl">
+            <div className="relative h-20 w-20 rounded-[2rem] border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(37,99,235,0.2)] bg-black/50 backdrop-blur-xl group cursor-pointer">
               <Image
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
                 alt="Zerox Host"
                 fill
                 unoptimized
-                className="object-cover scale-110"
+                className="object-cover scale-110 group-hover:scale-125 transition-transform duration-700"
               />
             </div>
             <div>
-              <h1 className="text-4xl font-black tracking-tight mb-2">System <span className="text-blue-500">Control</span></h1>
-              <p className="text-gray-500 font-bold tracking-[0.3em] uppercase text-[10px]">Infrastructure Management Panel</p>
+              <div className="flex items-center gap-3 mb-1">
+                <div className="h-2 w-2 rounded-full bg-green-500 animate-ping" />
+                <span className="text-[10px] font-black text-green-500 uppercase tracking-[0.3em]">System Online</span>
+              </div>
+              <h1 className="text-4xl font-black tracking-tight flex items-center gap-3">
+                Nexus <span className="text-blue-500">Control</span>
+              </h1>
+              <p className="text-gray-500 font-bold tracking-[0.3em] uppercase text-[10px]">Administrative Intelligence Interface</p>
             </div>
           </div>
           
-          <div className="flex items-center gap-4">
-            {activeTab !== 'partners' ? (
+          <div className="flex items-center gap-3 flex-wrap">
+            {activeTab !== 'partners' && activeTab !== 'calculator' ? (
               <button
                 onClick={() => {
                   setEditingProduct(null);
@@ -289,11 +302,12 @@ export default function AdminDashboard() {
                   });
                   setIsModalOpen(true);
                 }}
-                className="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm uppercase tracking-[0.2em] transition-all hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center gap-3"
+                className="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase tracking-[0.2em] transition-all hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center gap-3 group"
               >
-                <Plus size={20} /> {activeTab === 'deals' ? 'New Deal' : 'New Deployment'}
+                <Plus size={18} className="group-hover:rotate-90 transition-transform duration-300" /> 
+                New {activeTab === 'deals' ? 'Deal' : 'Deployment'}
               </button>
-            ) : (
+            ) : activeTab === 'partners' ? (
               <button
                 onClick={() => {
                   setEditingPartner(null);
@@ -305,54 +319,53 @@ export default function AdminDashboard() {
                   });
                   setIsPartnerModalOpen(true);
                 }}
-                className="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm uppercase tracking-[0.2em] transition-all hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center gap-3"
+                className="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase tracking-[0.2em] transition-all hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center gap-3 group"
               >
-                <Plus size={20} /> Add Partner
+                <Plus size={18} className="group-hover:rotate-90 transition-transform duration-300" /> Add Partner
               </button>
-            )}
+            ) : null}
+            
+            <div className="h-10 w-px bg-white/10 mx-2 hidden md:block" />
+
             <button
               onClick={handleImportData}
-              className="px-6 py-4 rounded-2xl bg-white/[0.03] border border-blue-500/20 text-blue-400 hover:text-white hover:bg-blue-500/20 transition-all font-black text-[10px] uppercase tracking-widest flex items-center gap-2"
-              title="Import from ZeroxHost"
+              className="px-6 py-4 rounded-2xl bg-white/[0.03] border border-white/10 text-blue-400 hover:text-white hover:bg-blue-500/20 hover:border-blue-500/50 transition-all font-black text-[10px] uppercase tracking-widest flex items-center gap-2"
+              title="Import all data"
             >
-              <Zap size={16} /> Import
+              <Zap size={16} /> Sync Data
             </button>
+            
             <button
               onClick={handleLogout}
-              className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-gray-400 hover:text-white hover:bg-red-500/20 hover:border-red-500/20 transition-all group"
+              className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-gray-400 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 transition-all group"
               title="Logout"
             >
-              <LogOut size={24} className="group-hover:translate-x-1 transition-transform" />
+              <LogOut size={22} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Tab Switcher */}
-        <div className="flex gap-4 mb-12 bg-white/[0.02] p-2 rounded-2xl border border-white/5 w-fit">
-          <button
-            onClick={() => setActiveTab('products')}
-            className={`px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'products' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
-          >
-            Deployments
-          </button>
-          <button
-            onClick={() => setActiveTab('deals')}
-            className={`px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'deals' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
-          >
-            Deals
-          </button>
-          <button
-            onClick={() => setActiveTab('partners')}
-            className={`px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'partners' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
-          >
-            Partners
-          </button>
-          <button
-            onClick={() => setActiveTab('calculator')}
-            className={`px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'calculator' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
-          >
-            Calculator
-          </button>
+        {/* Aesthetic Tab Switcher */}
+        <div className="flex gap-2 mb-12 bg-white/[0.02] p-2 rounded-[2rem] border border-white/5 w-fit backdrop-blur-xl">
+          {[
+            { id: 'products', label: 'Infrastructure', icon: Server },
+            { id: 'deals', label: 'Flash Deals', icon: Zap },
+            { id: 'partners', label: 'Partners', icon: Handshake },
+            { id: 'calculator', label: 'Economics', icon: CalcIcon }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`px-8 py-4 rounded-[1.4rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center gap-3 ${
+                activeTab === tab.id 
+                  ? 'bg-blue-600 text-white shadow-[0_10px_30px_rgba(37,99,235,0.3)]' 
+                  : 'text-gray-500 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <tab.icon size={14} className={activeTab === tab.id ? 'text-white' : 'text-gray-600'} />
+              {tab.label}
+            </button>
+          ))}
         </div>
 
         {activeTab !== 'partners' ? (

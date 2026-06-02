@@ -48,11 +48,11 @@ export default function VideoBackground() {
   }, [hasError]);
 
   return (
-    <div className="fixed inset-0 -z-[100] overflow-hidden bg-black">
+    <div className="fixed inset-0 -z-[100] overflow-hidden bg-[#020202]">
       {/* Fallback Layer - Gradients */}
       <div className="absolute inset-0 bg-[#020202] z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.05),transparent_50%)]" />
       </div>
 
       {/* The Video Layer */}
@@ -68,7 +68,7 @@ export default function VideoBackground() {
             onLoadedData={() => setIsVideoLoaded(true)}
             onPlaying={() => setIsVideoLoaded(true)}
             onError={handleVideoError}
-            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-80' : 'opacity-40'} pointer-events-none`}
+            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-60' : 'opacity-30'} pointer-events-none`}
           >
             <source src={videoUrl} type="video/mp4" />
           </video>
