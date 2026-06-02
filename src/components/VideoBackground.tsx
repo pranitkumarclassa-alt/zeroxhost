@@ -6,45 +6,54 @@ export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  const [videoUrl, setVideoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4");
+  const [videoUrl] = useState("https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4");
   const [hasError, setHasError] = useState(false);
 
-  const handleVideoError = () => {
-    console.error("Video failed to load:", videoUrl);
+  const handleVideoError = (e: any) => {
+    console.error("Video failed to load:", videoUrl, e);
     setHasError(true);
   };
 
   useEffect(() => {
-    const playVideo = () => {
+    const playVideo = async () => {
       if (videoRef.current) {
-        videoRef.current.playbackRate = 0.8;
-        videoRef.current.play().catch(err => {
-          console.warn("Autoplay failed, retrying on interaction...", err);
-        });
+        try {
+          videoRef.current.playbackRate = 0.8;
+          await videoRef.current.play();
+          setIsVideoLoaded(true);
+        } catch (err) {
+          console.warn("Autoplay failed, waiting for interaction...", err);
+          // Try to play again on any click
+          const playOnInteraction = () => {
+            videoRef.current?.play().then(() => {
+              setIsVideoLoaded(true);
+              document.removeEventListener('click', playOnInteraction);
+            });
+          };
+          document.addEventListener('click', playOnInteraction);
+        }
       }
     };
 
     playVideo();
     
-    // Ensure video keeps playing and loops correctly
+    // Ensure video keeps playing
     const interval = setInterval(() => {
-      if (videoRef.current && videoRef.current.paused && isVideoLoaded) {
+      if (videoRef.current && videoRef.current.paused && !hasError) {
         videoRef.current.play().catch(() => {});
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
-  }, [videoUrl, isVideoLoaded]);
+  }, [hasError]);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#020202]">
-      {/* Fallback Background Image / Gradients */}
-      {hasError && (
-        <div className="absolute inset-0 bg-[#020202] z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.1),transparent_50%)]" />
-        </div>
-      )}
+    <div className="fixed inset-0 -z-[100] overflow-hidden bg-black">
+      {/* Fallback Layer - Gradients */}
+      <div className="absolute inset-0 bg-[#020202] z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_50%)]" />
+      </div>
 
       {/* The Video Layer */}
       {!hasError && (
@@ -56,18 +65,12 @@ export default function VideoBackground() {
             muted
             playsInline
             preload="auto"
-            onLoadedData={() => {
-              console.log("Video background: Data Loaded");
-              setIsVideoLoaded(true);
-            }}
-            onCanPlay={() => setIsVideoLoaded(true)}
+            onLoadedData={() => setIsVideoLoaded(true)}
             onPlaying={() => setIsVideoLoaded(true)}
             onError={handleVideoError}
-            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
+            className={`h-full w-full object-cover scale-[1.05] transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-80' : 'opacity-40'} pointer-events-none`}
           >
-            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4.mp4" type="video/mp4" />
-            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website+material/video.mp4.mp4" type="video/mp4" />
-            <source src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/video.mp4" type="video/mp4" />
+            <source src={videoUrl} type="video/mp4" />
           </video>
         </div>
       )}
