@@ -249,6 +249,7 @@ export default function AdminDashboard() {
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
                 alt="Zerox Host"
                 fill
+                unoptimized
                 className="object-cover scale-110"
               />
             </div>
@@ -469,6 +470,7 @@ export default function AdminDashboard() {
                                 src={partner.logo_url}
                                 alt={partner.name}
                                 fill
+                                unoptimized
                                 className="object-cover"
                               />
                             </div>

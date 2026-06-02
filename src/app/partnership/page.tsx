@@ -150,6 +150,7 @@ export default function PartnershipPage() {
                           src={partner.logo_url}
                           alt={partner.name}
                           fill
+                          unoptimized
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </div>

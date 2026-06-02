@@ -22,9 +22,10 @@ export default function AnnouncementBanner() {
           {/* Background Banner Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/ChatGPT%20Image%20Jun%201,%202026,%2002_52_03%20PM.png"
+              src="https://lylvdeeorhjxevbdlqhm.supabase.co/storage/v1/object/public/website%20material/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_52_03%20PM.png"
               alt="Banner"
               fill
+              unoptimized
               className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700 group-hover:scale-105 transition-transform duration-1000"
               priority
             />

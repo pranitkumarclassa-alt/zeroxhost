@@ -128,6 +128,7 @@ export default function LoadingScreen() {
                     src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
                     alt="Zerox Host"
                     fill
+                    unoptimized
                     className="object-cover scale-110"
                     priority
                   />

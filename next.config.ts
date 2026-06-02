@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'lylvdeeorhjxevbdlqhm.supabase.co',
+      },
+      {
+        protocol: 'https',
         hostname: '**.supabase.co',
       },
       {
@@ -35,6 +39,22 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'encrypted-tbn0.gstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images8.alphacoders.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.exitlag.com',
       },
     ],
   },
