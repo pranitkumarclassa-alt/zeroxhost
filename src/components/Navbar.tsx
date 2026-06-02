@@ -58,12 +58,15 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Pricing', href: '/pricing', icon: Activity },
-    { name: 'Deals', href: '/pricing?category=deals', icon: Activity },
+    { name: 'Deals', href: '/pricing?category=deals', icon: Zap },
+  ];
+
+  const companyDropdown = [
     { name: 'Partners', href: '/partnership', icon: Handshake },
-    { name: t('nav.vps'), href: '/vps', icon: Server },
-    { name: t('nav.bots'), href: '/bots', icon: Bot },
     { name: 'Blog', href: '/blog', icon: BookOpen },
     { name: t('nav.reseller'), href: '/reseller', icon: Users },
+    { name: 'Legal', href: '/legal', icon: FileText },
+    { name: 'Live Status', href: 'https://status.zeroxhost.space', icon: Activity },
   ];
 
   const isActiveNavItem = (href: string) => {
@@ -172,15 +175,49 @@ export default function Navbar() {
               );
             })}
 
-            <div className="w-px h-6 bg-white/10 mx-1" />
-            <Link href="https://status.zeroxhost.space" target="_blank" rel="noreferrer noopener" className="relative overflow-hidden rounded-full px-3 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-violet-500/10 to-cyan-400/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="relative z-10 flex items-center gap-2"><Activity size={12} className="text-blue-400" /> Live Status</span>
-            </Link>
-            <Link href={legalLink.href} className="relative overflow-hidden rounded-full px-3 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-violet-500/10 to-cyan-400/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="relative z-10 flex items-center gap-2"><FileText size={12} className="text-blue-400" /> {legalLink.name}</span>
-            </Link>
+            <div 
+              className="relative group/company h-full flex items-center"
+              onMouseEnter={() => setActiveDropdown('company')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button className={cn(
+                "flex items-center gap-2 rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
+                activeDropdown === 'company' 
+                  ? "bg-blue-600/20 border-blue-500/50 text-white shadow-[0_0_20px_rgba(37,99,235,0.2)]" 
+                  : "bg-white/5 border-white/10 text-gray-300 hover:border-blue-400/50 hover:text-white hover:bg-white/10"
+              )}>
+                <Layers size={12} className="text-blue-500" /> Company <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'company' && "rotate-180")} />
+              </button>
+              
+              <AnimatePresence>
+                {activeDropdown === 'company' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 12, scale: 0.98 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[240px] z-[110]"
+                  >
+                    <div className="bg-[#05050a]/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 shadow-[0_40px_100px_rgba(0,0,0,0.6)] flex flex-col gap-1 relative">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+                      
+                      {companyDropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          target={item.href.startsWith('http') ? '_blank' : undefined}
+                          className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/30 group/item"
+                        >
+                          <div className="w-8 h-8 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:scale-110 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
+                            <item.icon size={14} />
+                          </div>
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">{item.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Right Side Actions */}
