@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Gamepad2, Globe, Server, Layers, Bot, FileText, Activity, MessageSquare, Users, Handshake, BookOpen } from 'lucide-react';
+import { Menu, X, ChevronDown, Gamepad2, Globe, Server, Layers, Bot, FileText, Activity, MessageSquare, Users, Handshake, BookOpen, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCurrency } from '@/lib/CurrencyContext';
 import { useLanguage } from '@/lib/LanguageContext';
