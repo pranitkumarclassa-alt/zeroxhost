@@ -46,6 +46,14 @@ async function ensureTables() {
           created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         )
       `;
+
+      await sql`
+        CREATE TABLE IF NOT EXISTS settings (
+          key TEXT PRIMARY KEY,
+          value JSONB NOT NULL,
+          updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        )
+      `;
     } catch (dbErr) {
       console.error('SQL migration failed, falling back to Supabase HTTP:', dbErr);
       // If SQL fails, the tables might still exist or we can try via Supabase dashboard manually
@@ -237,5 +245,31 @@ export async function deletePartner(id: string) {
   } catch (error: any) {
     console.error('Error deleting partner:', error);
     return { success: false, error: error.message || 'Failed to delete partner' };
+  }
+}
+
+// Settings Actions
+export async function getSettings(key: string) {
+  try {
+    const { data, error } = await (supabase.from('settings') as any).select('value').eq('key', key).single();
+    if (error) {
+      if (error.code === 'PGRST116') return { success: true, data: null }; // Not found
+      throw error;
+    }
+    return { success: true, data: data.value };
+  } catch (error: any) {
+    console.error('Error fetching settings:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateSettings(key: string, value: any) {
+  try {
+    const { error } = await (supabase.from('settings') as any).upsert({ key, value, updated_at: new Date().toISOString() });
+    if (error) throw error;
+    return { success: true };
+  } catch (error: any) {
+    console.error('Error updating settings:', error);
+    return { success: false, error: error.message };
   }
 }

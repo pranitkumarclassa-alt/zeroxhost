@@ -134,4 +134,38 @@ export const importedProducts = [
     badge: 'MOST POPULAR',
     display_order: 2,
   },
+  // Additional Web Hosting Plans from zeroxhost.space
+  {
+    category: 'web',
+    name: 'Enterprise Web',
+    description: 'Large scale websites',
+    price: '450',
+    specs: { ram: '16GB RAM', ssd: '100GB Disk', ssl: 'Free SSL', panel: 'cPanel', bandwidth: 'Unmetered' },
+    display_order: 3,
+  },
+  {
+    category: 'web',
+    name: 'Business Web',
+    description: 'Corporate solutions',
+    price: '300',
+    specs: { ram: '12GB RAM', ssd: '75GB Disk', ssl: 'Free SSL', panel: 'cPanel', bandwidth: 'Unmetered' },
+    display_order: 4,
+  },
+  // Additional VDS Plans from zeroxhost.space
+  {
+    category: 'vds',
+    name: 'Extreme VDS',
+    description: 'Maximum dedicated power',
+    price: '8500',
+    specs: { ram: '64GB DDR4', cpu: '12 Dedicated Cores', ssd: '800GB NVMe', bandwidth: 'Unmetered' },
+    display_order: 3,
+  },
+  {
+    category: 'vds',
+    name: 'VDS Starter',
+    description: 'Dedicated resources',
+    price: '1000',
+    specs: { ram: '4GB DDR4', cpu: '1 Dedicated Core', ssd: '50GB NVMe', bandwidth: '5TB Bandwidth' },
+    display_order: 4,
+  },
 ];

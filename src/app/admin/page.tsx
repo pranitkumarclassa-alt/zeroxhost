@@ -7,10 +7,10 @@ import {
   Plus, Trash2, Edit2, LogOut, Package, 
   Gamepad2, Server, Bot, Globe, Layers, 
   Save, X, Loader2, ArrowRight, ExternalLink, 
-  Handshake, Zap 
+  Handshake, Zap, Calculator as CalcIcon, Settings
 } from 'lucide-react';
 import Image from 'next/image';
-import { checkSession, logoutAction, getProducts, addProduct, updateProduct, deleteProduct, getPartners, addPartner, updatePartner, deletePartner, seedProducts } from '../actions';
+import { checkSession, logoutAction, getProducts, addProduct, updateProduct, deleteProduct, getPartners, addPartner, updatePartner, deletePartner, seedProducts, getSettings, updateSettings } from '../actions';
 import { importedProducts } from '@/lib/importedData';
 
 const categories = ['games', 'web', 'vps', 'vds', 'bots', 'deals'];
@@ -28,9 +28,15 @@ export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [dataLoading, setDataLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'products' | 'deals' | 'partners'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'deals' | 'partners' | 'calculator'>('products');
   const [products, setProducts] = useState<any[]>([]);
   const [partners, setPartners] = useState<any[]>([]);
+  const [calcSettings, setCalcSettings] = useState({
+    basePrice: 50,
+    ramPrice: 25,
+    cpuPrice: 50,
+    ssdPrice: 2,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any>(null);
@@ -71,6 +77,11 @@ export default function AdminDashboard() {
     else console.error('Error fetching partners:', result.error);
   };
 
+  const fetchCalcSettings = async () => {
+    const result = await getSettings('calculator_prices');
+    if (result.success && result.data) setCalcSettings(result.data);
+  };
+
   const handleLogout = async () => {
     await logoutAction();
     router.push('/login');
@@ -103,7 +114,7 @@ export default function AdminDashboard() {
         
         // Fetch data in the background
         setDataLoading(true);
-        await Promise.all([fetchProducts(), fetchPartners()]);
+        await Promise.all([fetchProducts(), fetchPartners(), fetchCalcSettings()]);
         setDataLoading(false);
       } catch (error) {
         console.error('Failed to initialize admin dashboard:', error);
@@ -336,6 +347,12 @@ export default function AdminDashboard() {
           >
             Partners
           </button>
+          <button
+            onClick={() => setActiveTab('calculator')}
+            className={`px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'calculator' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+          >
+            Calculator
+          </button>
         </div>
 
         {activeTab !== 'partners' ? (
@@ -522,6 +539,97 @@ export default function AdminDashboard() {
               )}
             </div>
           </>
+        )}
+
+        {activeTab === 'calculator' && (
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white/[0.02] backdrop-blur-3xl border border-white/5 p-12 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.5)]"
+            >
+              <div className="flex items-center gap-6 mb-12">
+                <div className="w-16 h-16 rounded-[1.5rem] bg-blue-600/10 flex items-center justify-center border border-blue-500/20">
+                  <CalcIcon size={32} className="text-blue-500" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black text-white uppercase tracking-tight">Calculator Settings</h2>
+                  <p className="text-gray-500 font-bold uppercase text-[10px] tracking-widest">Configure dynamic resource pricing</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Base Platform Price</label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={calcSettings.basePrice}
+                      onChange={(e) => setCalcSettings({ ...calcSettings, basePrice: parseFloat(e.target.value) })}
+                      className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white font-black outline-none focus:border-blue-600/50 transition-all"
+                    />
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-xs">INR</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Price per GB RAM</label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={calcSettings.ramPrice}
+                      onChange={(e) => setCalcSettings({ ...calcSettings, ramPrice: parseFloat(e.target.value) })}
+                      className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white font-black outline-none focus:border-blue-600/50 transition-all"
+                    />
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-xs">/ GB</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Price per vCore CPU</label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={calcSettings.cpuPrice}
+                      onChange={(e) => setCalcSettings({ ...calcSettings, cpuPrice: parseFloat(e.target.value) })}
+                      className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white font-black outline-none focus:border-blue-600/50 transition-all"
+                    />
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-xs">/ Core</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Price per GB SSD</label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={calcSettings.ssdPrice}
+                      onChange={(e) => setCalcSettings({ ...calcSettings, ssdPrice: parseFloat(e.target.value) })}
+                      className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white font-black outline-none focus:border-blue-600/50 transition-all"
+                    />
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-xs">/ GB</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 pt-12 border-t border-white/5">
+                <button
+                  onClick={async () => {
+                    setLoading(true);
+                    const result = await updateSettings('calculator_prices', calcSettings);
+                    if (result.success) alert('Calculator settings saved successfully!');
+                    else alert('Error: ' + result.error);
+                    setLoading(false);
+                  }}
+                  disabled={loading}
+                  className="w-full py-6 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-sm uppercase tracking-[0.25em] transition-all flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(37,99,235,0.2)]"
+                >
+                  {loading ? <Loader2 className="animate-spin" /> : <Save size={20} />}
+                  Save Global Configuration
+                </button>
+              </div>
+            </motion.div>
+          </div>
         )}
       </div>
 

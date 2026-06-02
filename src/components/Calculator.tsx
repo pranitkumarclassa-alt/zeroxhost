@@ -2,24 +2,47 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, HardDrive, Zap, ShoppingCart } from 'lucide-react';
+import { Cpu, HardDrive, Zap, ShoppingCart, Loader2 } from 'lucide-react';
 import { useCurrency } from '@/lib/CurrencyContext';
+import { getSettings } from '@/app/actions';
 
 export default function Calculator() {
   const [ram, setRam] = useState(4);
   const [cpu, setCpu] = useState(2);
   const [ssd, setSsd] = useState(50);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [prices, setPrices] = useState({
+    basePrice: 50,
+    ramPrice: 25,
+    cpuPrice: 50,
+    ssdPrice: 2,
+  });
+  const [loading, setLoading] = useState(true);
   const { formatPrice } = useCurrency();
 
   useEffect(() => {
-    // Base Price: 50
-    // RAM: 25 per GB
-    // CPU: 50 per vCore
-    // SSD: 2 per GB
-    const calculated = 50 + (ram * 25) + (cpu * 50) + (ssd * 2);
+    const fetchPrices = async () => {
+      const result = await getSettings('calculator_prices');
+      if (result.success && result.data) {
+        setPrices(result.data);
+      }
+      setLoading(false);
+    };
+    fetchPrices();
+  }, []);
+
+  useEffect(() => {
+    const calculated = prices.basePrice + (ram * prices.ramPrice) + (cpu * prices.cpuPrice) + (ssd * prices.ssdPrice);
     setTotalPrice(calculated);
-  }, [ram, cpu, ssd]);
+  }, [ram, cpu, ssd, prices]);
+
+  if (loading) {
+    return (
+      <div className="py-24 flex items-center justify-center">
+        <Loader2 className="animate-spin text-blue-600" size={48} />
+      </div>
+    );
+  }
 
   return (
     <section id="calculator" className="py-24 px-6 relative overflow-hidden bg-transparent">
