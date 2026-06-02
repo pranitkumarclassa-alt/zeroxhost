@@ -59,7 +59,7 @@ async function ensureTables() {
 
 export async function seedProducts(products: any[]) {
   try {
-    const { error } = await supabase.from('products').insert(products);
+    const { error } = await (supabase.from('products') as any).insert(products);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -104,8 +104,8 @@ export async function checkSession() {
 // which is almost never blocked by ISPs or firewalls.
 export async function getProducts() {
   try {
-    const { data, error } = await supabase
-      .from('products')
+    const { data, error } = await (supabase
+      .from('products') as any)
       .select('*')
       .order('display_order', { ascending: true })
       .order('created_at', { ascending: false });
@@ -133,7 +133,7 @@ export async function addProduct(product: any) {
       display_order: parseInt(product.display_order || '0'),
     };
 
-    const { error } = await supabase.from('products').insert([dataToSubmit]);
+    const { error } = await (supabase.from('products') as any).insert([dataToSubmit]);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -157,7 +157,7 @@ export async function updateProduct(id: string, product: any) {
       display_order: parseInt(product.display_order || '0'),
     };
 
-    const { error } = await supabase.from('products').update(dataToSubmit).eq('id', id);
+    const { error } = await (supabase.from('products') as any).update(dataToSubmit).eq('id', id);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -168,7 +168,7 @@ export async function updateProduct(id: string, product: any) {
 
 export async function deleteProduct(id: string) {
   try {
-    const { error } = await supabase.from('products').delete().eq('id', id);
+    const { error } = await (supabase.from('products') as any).delete().eq('id', id);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -180,8 +180,8 @@ export async function deleteProduct(id: string) {
 // Partner Actions
 export async function getPartners() {
   try {
-    const { data, error } = await supabase
-      .from('partners')
+    const { data, error } = await (supabase
+      .from('partners') as any)
       .select('*')
       .order('created_at', { ascending: false });
     
@@ -202,7 +202,7 @@ export async function addPartner(partner: any) {
       description: partner.description || '',
     };
 
-    const { error } = await supabase.from('partners').insert([dataToSubmit]);
+    const { error } = await (supabase.from('partners') as any).insert([dataToSubmit]);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -220,7 +220,7 @@ export async function updatePartner(id: string, partner: any) {
       description: partner.description,
     };
 
-    const { error } = await supabase.from('partners').update(dataToSubmit).eq('id', id);
+    const { error } = await (supabase.from('partners') as any).update(dataToSubmit).eq('id', id);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
@@ -231,7 +231,7 @@ export async function updatePartner(id: string, partner: any) {
 
 export async function deletePartner(id: string) {
   try {
-    const { error } = await supabase.from('partners').delete().eq('id', id);
+    const { error } = await (supabase.from('partners') as any).delete().eq('id', id);
     if (error) throw error;
     return { success: true };
   } catch (error: any) {
