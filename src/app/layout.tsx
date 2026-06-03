@@ -17,6 +17,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://zeroxhost.space'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: "ZEROX HOST | Premium India Hosting | Game, VPS, VDS, Web & Bot Hosting",
     template: "%s | ZEROX HOST"
@@ -70,15 +74,39 @@ export const metadata: Metadata = {
 };
 
 import VideoBackground from "@/components/VideoBackground";
+import JsonLd from "@/components/JsonLd";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ZEROX HOST",
+    "url": "https://zeroxhost.space",
+    "logo": "https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048",
+    "description": "Premium India-based hosting solutions featuring Game Servers, Cloud VPS, Dedicated VDS, and Web Hosting.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Delhi",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "akshitkanswal111@gmail.com",
+      "contactType": "customer support"
+    },
+    "sameAs": [
+      "https://discord.gg/56VcDMZbrj"
+    ]
+  };
+
   return (
     <html lang="en" className={`${montserrat.variable} ${plusJakartaSans.variable}`}>
       <body className="font-jakarta bg-transparent">
+        <JsonLd data={organizationData} />
         <LanguageProvider>
           <CurrencyProvider>
             <VideoBackground />

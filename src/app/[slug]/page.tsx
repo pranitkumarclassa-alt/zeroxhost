@@ -9,6 +9,7 @@ import Locations from '@/components/Locations';
 import WhyZerox from '@/components/WhyZerox';
 import { MapPin, Zap, Shield, Cpu, ChevronRight, MessageSquare, Star } from 'lucide-react';
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,6 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${page.title} | ZeroXHost`,
     description: page.description,
     keywords: [page.keyword, 'VPS Hosting', 'India VPS', 'ZeroXHost'],
+    alternates: {
+      canonical: `/${slug}`,
+    },
   };
 }
 
@@ -37,8 +41,40 @@ export default async function PSEOPage({ params }: Props) {
     notFound();
   }
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": page.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": page.title,
+    "description": page.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "ZEROX HOST"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://zeroxhost.space/${slug}`,
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
+      <JsonLd data={faqSchema} />
+      <JsonLd data={productSchema} />
       <Navbar />
       
       <div className="relative z-10">

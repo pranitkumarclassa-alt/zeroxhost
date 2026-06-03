@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="relative h-12 w-12 overflow-hidden rounded-2xl border border-white/10 transition-all group-hover:scale-110 group-hover:border-blue-500/50">
               <Image
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
-                alt="Zerox Host"
+                alt="ZEROX HOST - Footer Logo"
                 fill
                 unoptimized
                 className="object-cover"

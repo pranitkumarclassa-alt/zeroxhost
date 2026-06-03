@@ -23,6 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${comparison.title} | ZeroXHost Comparisons`,
     description: comparison.description,
+    alternates: {
+      canonical: `/comparisons/${slug}`,
+    },
   };
 }
 

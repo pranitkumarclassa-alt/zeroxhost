@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { BookOpen, Calendar, Clock, ChevronRight, MessageSquare, Share2 } from 'lucide-react';
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,6 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${article.title} | ZeroXHost Knowledge Base`,
     description: article.excerpt,
+    alternates: {
+      canonical: `/knowledgebase/${slug}`,
+    },
     openGraph: {
       title: article.title,
       description: article.excerpt,
@@ -39,8 +43,45 @@ export default async function KBArticlePage({ params }: Props) {
     notFound();
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": article.title,
+    "description": article.excerpt,
+    "image": "https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048",
+    "author": {
+      "@type": "Organization",
+      "name": "ZEROX HOST"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ZEROX HOST",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
+      }
+    },
+    "datePublished": article.lastUpdated,
+    "dateModified": article.lastUpdated
+  };
+
+  const faqSchema = article.faqs ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": article.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
+      <JsonLd data={articleSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <Navbar />
       
       <div className="relative z-10">

@@ -96,7 +96,7 @@ export default function Navbar() {
             <div className="relative h-12 w-12 rounded-2xl overflow-hidden group-hover:scale-110 transition-all duration-500 border border-white/10 group-hover:border-blue-500/50">
               <Image
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
-                alt="Zerox Host"
+                alt="ZEROX HOST - Premium India Hosting Logo"
                 fill
                 unoptimized
                 className="object-cover"
