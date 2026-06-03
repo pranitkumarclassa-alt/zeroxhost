@@ -100,9 +100,14 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="text-gray-500 text-xs font-bold uppercase tracking-widest">
-          © 2026 Zerox Host. All rights reserved.
+      <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+        <div className="flex flex-col gap-2">
+          <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">
+            © 2026 ZEROXHOST.SPACE - ZEROX HOST INDIA - ALL RIGHTS RESERVED
+          </p>
+          <p className="text-gray-700 text-[8px] font-bold uppercase tracking-[0.3em]">
+            zeroxhost.space | zeroxhost.com | ZeroXHost | ZEROX HOST
+          </p>
         </div>
         <div className="flex gap-8">
           <Link href="https://status.zeroxhost.space/" target="_blank" className="text-gray-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">Status</Link>

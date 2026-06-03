@@ -13,8 +13,8 @@ export default function About() {
       
       <div className="relative z-10">
         <PageHeader 
-          title="About Zerox Host" 
-          subtitle="We are India's leading hosting provider, dedicated to delivering enterprise-grade performance and unmatched reliability for gamers and developers alike."
+          title="About ZeroXHost" 
+          subtitle="ZeroXHost is India's leading hosting provider, dedicated to delivering enterprise-grade performance and unmatched reliability for gamers and developers alike."
         />
 
         <section className="py-24 px-6">
@@ -26,18 +26,18 @@ export default function About() {
                 viewport={{ once: true }}
                 className="space-y-8"
               >
-                <h2 className="text-5xl font-black text-white drop-shadow-md">Our Mission</h2>
+                <h2 className="text-5xl font-black text-white drop-shadow-md">The ZeroXHost Mission</h2>
                 <p className="text-gray-300 text-xl leading-relaxed font-bold drop-shadow-sm">
-                  Founded with a vision to revolutionize the hosting industry in India, Zerox Host provides high-frequency compute power and low-latency networking. We believe that everyone deserves access to premium infrastructure without the enterprise price tag.
+                  Founded with a vision to revolutionize the hosting industry in India, ZeroXHost provides high-frequency compute power and low-latency networking. At ZeroXHost, we believe that everyone deserves access to premium infrastructure without the enterprise price tag.
                 </p>
                 <div className="grid grid-cols-2 gap-10 pt-8">
                   <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
                     <div className="text-4xl font-black text-blue-500 mb-2 shadow-blue-500/20 shadow-sm">99.9%</div>
-                    <div className="text-gray-500 font-black uppercase tracking-[0.2em] text-[10px]">Uptime SLA</div>
+                    <div className="text-gray-500 font-black uppercase tracking-[0.2em] text-[10px]">ZeroXHost SLA</div>
                   </div>
                   <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
-                    <div className="text-4xl font-black text-blue-500 mb-2 shadow-blue-500/20 shadow-sm">Delhi</div>
-                    <div className="text-gray-500 font-black uppercase tracking-[0.2em] text-[10px]">Primary Node</div>
+                    <div className="text-4xl font-black text-blue-500 mb-2 shadow-blue-500/20 shadow-sm">Mumbai</div>
+                    <div className="text-gray-500 font-black uppercase tracking-[0.2em] text-[10px]">ZeroXHost Hub</div>
                   </div>
                 </div>
               </motion.div>

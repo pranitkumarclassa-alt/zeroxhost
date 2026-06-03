@@ -13,8 +13,8 @@ export default function ContactPage() {
       
       <div className="relative z-10">
         <PageHeader 
-          title="Contact Us" 
-          subtitle="Have questions? Our team is here to help you 24/7. Reach out via Discord or email."
+          title="Contact ZeroXHost" 
+          subtitle="Have questions about ZeroXHost services? Our team is here to help you 24/7. Reach out via Discord or email."
         />
 
         <section className="py-24 px-6">

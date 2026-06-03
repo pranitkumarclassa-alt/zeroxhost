@@ -35,7 +35,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-7xl md:text-[110px] font-black text-white leading-[0.85] mb-10 tracking-tighter font-montserrat"
           >
-            Unleash<br />
+            ZeroXHost<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-600">
               Supreme<br />
               Performance

@@ -1,0 +1,10 @@
+/* TEAM */
+    Developer: ZEROX HOST Team
+    Site: https://zeroxhost.space
+    Location: Delhi, India
+
+/* SITE */
+    Last update: 2026/06/03
+    Standards: HTML5, CSS3, Next.js, TypeScript, Tailwind CSS
+    Components: Lucide Icons, Framer Motion
+    Software: VS Code, Trae IDE

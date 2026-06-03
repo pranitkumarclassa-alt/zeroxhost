@@ -71,6 +71,14 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  verification: {
+    google: "google1f58228df179c211",
+  },
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black",
+    "apple-mobile-web-app-title": "ZeroXHost",
+  },
 };
 
 import VideoBackground from "@/components/VideoBackground";
@@ -104,8 +112,24 @@ export default function RootLayout({
       "reviewCount": "524"
     },
     "sameAs": [
-      "https://discord.gg/56VcDMZbrj"
+      "https://discord.gg/56VcDMZbrj",
+      "https://twitter.com/zeroxhost",
+      "https://github.com/zeroxhost",
+      "https://www.linkedin.com/company/zeroxhost"
     ]
+  };
+
+  const websiteData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ZeroXHost",
+    "alternateName": ["zeroxhost", "Zero X Host", "ZEROXHOST"],
+    "url": "https://zeroxhost.space",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://zeroxhost.space/knowledgebase?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   };
 
   const localBusinessData = {
@@ -148,6 +172,7 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable} ${plusJakartaSans.variable}`}>
       <body className="font-jakarta bg-transparent">
         <JsonLd data={organizationData} />
+        <JsonLd data={websiteData} />
         <JsonLd data={localBusinessData} />
         <LanguageProvider>
           <CurrencyProvider>

@@ -10,10 +10,13 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 import WhyZerox from '@/components/WhyZerox';
 import Reviews from '@/components/Reviews';
+import FAQ from '@/components/FAQ';
+import FAQSchema from '@/components/FAQSchema';
 
 export default function Home() {
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
+      <FAQSchema />
       <LoadingScreen />
       
       <div className="relative z-10 bg-transparent">
@@ -38,6 +41,7 @@ export default function Home() {
         <Pricing />
         <Calculator />
         <Reviews />
+        <FAQ />
         <AdvancedFeatures />
         <Locations />
         <Footer />
