@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Check, Zap, Gamepad2, Server, Bot, 
   Shield, MapPin, Globe, Layers, 
-  MessageSquare, Loader2, Activity, Package 
+  MessageSquare, Loader2, Activity, Package,
+  Cpu, HardDrive 
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -65,24 +66,24 @@ const gamesList = [
 const mainCategories = [
   { 
     id: 'games', 
-    name: 'Games', 
+    name: 'Minecraft', 
     icon: Gamepad2,
-    description: 'DOMINATE THE COMPETITION WITH OUR HIGH-TICK RATE GAME SERVERS. POWERED BY RYZEN 9 & NVME GEN4 HARDWARE FOR ZERO-LAG PERFORMANCE.',
-    banner: '🎮 MINECRAFT, ARK, CS:GO, GTA, AMONG US & MORE — ALL ON PREMIUM HARDWARE.'
-  },
-  { 
-    id: 'web', 
-    name: 'Web', 
-    icon: Globe,
-    description: 'LIGHTNING FAST WEB HOSTING SOLUTIONS POWERED BY LITESPEED & NVME SSD. PERFECT FOR PORTFOLIOS, BLOGS & BUSINESS WEBSITES.',
-    banner: '🌐 FAST, SECURE SHARED WEB HOSTING WITH CPANEL AND FREE SSL.'
+    description: 'DOMINATE THE COMPETITION WITH OUR HIGH-TICK RATE MINECRAFT SERVERS. POWERED BY RYZEN 9 7950X & NVME GEN4 HARDWARE.',
+    banner: '🎮 OPTIMIZED FOR PAPER, PURPUR, FORGE & FABRIC — INSTANT DEPLOYMENT.'
   },
   { 
     id: 'vps', 
-    name: 'VPS', 
+    name: 'Cloud VPS', 
     icon: Server,
     description: 'ENTERPRISE-GRADE VIRTUAL PRIVATE SERVERS WITH DEDICATED RESOURCES, ROOT ACCESS & ULTRA-LOW LATENCY INDIA NODES.',
-    banner: '⚡ KVM-VIRTUALIZED VPS — INTEL E5 V4 & INTEL PLATINUM 8269CY IN DELHI.'
+    banner: '⚡ KVM-VIRTUALIZED VPS — AMD EPYC 7003 & NVME STORAGE IN MUMBAI.'
+  },
+  { 
+    id: 'bots', 
+    name: 'Bot Hosting', 
+    icon: Bot,
+    description: '24/7 UPTIME FOR YOUR DISCORD, TELEGRAM & WHATSAPP BOTS. EASY MANAGEMENT PANEL & INSTANT PROVISIONING.',
+    banner: '🤖 RUN DISCORD, TELEGRAM & WHATSAPP BOTS 24/7 WITH AUTO-RESTART.'
   },
   { 
     id: 'vds', 
@@ -92,11 +93,11 @@ const mainCategories = [
     banner: '💎 BARE-METAL PERFORMANCE WITH DEDICATED CPU CORES AND RAM.'
   },
   { 
-    id: 'bots', 
-    name: 'Bots', 
-    icon: Bot,
-    description: '24/7 UPTIME FOR YOUR DISCORD, TELEGRAM & WHATSAPP BOTS. EASY MANAGEMENT PANEL & INSTANT PROVISIONING.',
-    banner: '🤖 RUN DISCORD, TELEGRAM & WHATSAPP BOTS 24/7 WITH AUTO-RESTART.'
+    id: 'web', 
+    name: 'Web Hosting', 
+    icon: Globe,
+    description: 'LIGHTNING FAST WEB HOSTING SOLUTIONS POWERED BY LITESPEED & NVME SSD. PERFECT FOR PORTFOLIOS, BLOGS & BUSINESS WEBSITES.',
+    banner: '🌐 FAST, SECURE SHARED WEB HOSTING WITH CPANEL AND FREE SSL.'
   },
 ];
 
@@ -321,34 +322,36 @@ export default function Pricing({ initialCategory = 'games', hideTabs = false }:
                   </div>
                 </div>
 
-                <div className="relative z-10 space-y-6 flex-grow mb-12">
-                  {Object.entries(tier).map(([key, value]) => {
-                    if (['id', 'name', 'desc', 'price', 'featured', 'badge', 'game_icon', 'original_price', 'category', 'display_order', 'created_at'].includes(key)) return null;
-                    return (
-                      <div key={key} className="flex items-center gap-5 group/item">
-                        <div className="w-8 h-8 rounded-2xl bg-blue-600/10 flex items-center justify-center border border-blue-500/20 group-hover/item:bg-blue-600 group-hover/item:border-blue-400 transition-all duration-300">
-                          <Check className="text-blue-500 group-hover/item:text-white w-4 h-4" />
-                        </div>
-                        <span className="text-gray-300 font-black text-[14px] group-hover/item:text-white transition-colors">{String(value)}</span>
+                <div className="relative z-10 flex-grow mb-12">
+                    <div className="flex flex-col gap-5 mb-10">
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 group-hover:border-blue-500/20 transition-all">
+                        <Cpu size={18} className="text-blue-500" />
+                        <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{tier.cpu}</div>
                       </div>
-                    );
-                  })}
-                  
-                  {/* Default Performance Specs */}
-                  <div className="pt-6 border-t border-white/5 space-y-6">
-                    <div className="flex items-center gap-5">
-                      <div className="w-8 h-8 rounded-2xl bg-green-500/10 flex items-center justify-center border border-green-500/20">
-                        <Shield className="text-green-500 w-4 h-4" />
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 group-hover:border-blue-500/20 transition-all">
+                        <Zap size={18} className="text-blue-500" />
+                        <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{tier.ram}</div>
                       </div>
-                      <span className="text-gray-400 font-black text-[11px] uppercase tracking-widest">Advanced DDoS Shield</span>
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 group-hover:border-blue-500/20 transition-all">
+                        <HardDrive size={18} className="text-blue-500" />
+                        <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{tier.ssd || tier.disk}</div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-5">
-                      <div className="w-8 h-8 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                        <MapPin className="text-blue-500 w-4 h-4" />
+
+                    <div className="space-y-4 mb-10">
+                      <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-gray-500">
+                        <Check size={14} className="text-blue-500" />
+                        Dedicated Resources
                       </div>
-                      <span className="text-gray-400 font-black text-[11px] uppercase tracking-widest">India Tier-3 Node</span>
+                      <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-gray-500">
+                        <Check size={14} className="text-blue-500" />
+                        Instant Provisioning
+                      </div>
+                      <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-gray-500">
+                        <Check size={14} className="text-blue-500" />
+                        DDoS Protection
+                      </div>
                     </div>
-                  </div>
                 </div>
 
                 <Link

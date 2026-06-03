@@ -12,6 +12,7 @@ import WhyZerox from '@/components/WhyZerox';
 import Reviews from '@/components/Reviews';
 import FAQ from '@/components/FAQ';
 import FAQSchema from '@/components/FAQSchema';
+import HardwareShowcase from '@/components/HardwareShowcase';
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
           
           {/* Noise texture */}
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
+          <div className="absolute inset-0 bg-grid opacity-[0.02]" />
         </div>
         
         <AnnouncementBanner />
@@ -38,6 +40,7 @@ export default function Home() {
         <Hero />
         <Features />
         <WhyZerox />
+        <HardwareShowcase />
         <Pricing />
         <Calculator />
         <Reviews />

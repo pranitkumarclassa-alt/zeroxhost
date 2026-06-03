@@ -48,7 +48,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-400 max-w-xl mb-14 leading-relaxed font-black uppercase tracking-tight"
           >
-            Experience ultra-low latency nodes powered by <span className="text-white">Ryzen 9 & NVMe Gen4</span>. The ultimate choice for serious communities.
+            Deploy <span className="text-white">Minecraft Servers</span>, VPS, and Discord Bots in seconds. Powered by <span className="text-blue-500">Ryzen 9 & NVMe Gen4</span>.
           </motion.p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6">

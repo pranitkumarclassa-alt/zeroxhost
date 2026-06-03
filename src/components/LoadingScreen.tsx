@@ -7,6 +7,7 @@ import Image from 'next/image';
 const LOG_MESSAGES = [
   "Initializing neural core...",
   "Establishing secure handshake...",
+  "Syncing Mumbai-1 datacenter...",
   "Syncing Delhi-1 datacenter...",
   "Calibrating NVMe Gen4 arrays...",
   "Loading enterprise DDoS filters...",

@@ -98,14 +98,31 @@ export default function WhyZerox() {
                 <div className="w-20 h-20 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:border-blue-500/50 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] transition-all duration-500">
                   <item.icon size={32} className="text-blue-500 drop-shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-4 group-hover:text-blue-400 transition-colors duration-500 tracking-tight">{item.title}</h3>
-                <p className="text-gray-500 font-medium leading-relaxed italic text-sm">{item.desc}</p>
+                <h3 className="text-3xl font-black text-white mb-6 tracking-tight group-hover:text-blue-400 transition-colors">{item.title}</h3>
+                <p className="text-gray-500 text-lg leading-relaxed font-bold">{item.desc}</p>
               </div>
+            </motion.div>
+          ))}
+        </div>
 
-              {/* Decorative Corner Element */}
-              <div className="absolute bottom-6 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <div className="w-12 h-px bg-gradient-to-r from-transparent to-blue-500/50" />
-              </div>
+        {/* Dynamic Stats - Halix Style */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-24">
+          {[
+            { label: 'SERVERS DEPLOYED', value: '5,000+' },
+            { label: 'UPTIME SLA', value: '99.9%' },
+            { label: 'GLOBAL POPS', value: '12+' },
+            { label: 'SUPPORT TEAM', value: '24/7' },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="text-center p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl"
+            >
+              <div className="text-3xl md:text-5xl font-black text-white mb-2">{stat.value}</div>
+              <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em]">{stat.label}</div>
             </motion.div>
           ))}
         </div>

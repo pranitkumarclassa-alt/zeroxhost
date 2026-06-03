@@ -320,7 +320,7 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <Link
                 href="https://panel.zeroxhost.space/auth/login"
-                className="px-8 py-3 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-blue-700 shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-105 active:scale-95"
+                className="px-8 py-4 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-blue-700 shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 border border-blue-400/30"
               >
                 Client Area
               </Link>
