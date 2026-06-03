@@ -30,10 +30,10 @@ export default function GlossaryLinker({ text }: GlossaryLinkerProps) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   };
 
-  let parts: (string | JSX.Element)[] = [text];
+  let parts: (string | React.ReactNode)[] = [text];
 
   allTerms.forEach(({ term, href, key }) => {
-    const newParts: (string | JSX.Element)[] = [];
+    const newParts: (string | React.ReactNode)[] = [];
     const regex = new RegExp(`\\b(${escapeRegExp(term)})\\b`, 'gi');
 
     parts.forEach(part => {
