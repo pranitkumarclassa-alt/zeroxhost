@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import VdsPage from './VdsClient';
+import VdsClient from './VdsClient';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: "Premium VDS Hosting India | Dedicated Resources | Delhi Node",
@@ -11,5 +12,42 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <VdsPage />;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Virtual Dedicated Server (VDS)",
+    "provider": {
+      "@type": "Organization",
+      "name": "ZEROX HOST"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    }
+  };
+
+  return (
+    <>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://zeroxhost.space"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Virtual Dedicated Server",
+            "item": "https://zeroxhost.space/vds"
+          }
+        ]
+      }} />
+      <VdsClient />
+    </>
+  );
 }

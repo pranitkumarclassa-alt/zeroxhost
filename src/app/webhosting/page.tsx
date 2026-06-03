@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import WebHostingClient from './WebHostingClient';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: "Fast Web Hosting India | cPanel & NVMe | Delhi Servers",
@@ -11,5 +12,42 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <WebHostingClient />;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Web Hosting",
+    "provider": {
+      "@type": "Organization",
+      "name": "ZEROX HOST"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    }
+  };
+
+  return (
+    <>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://zeroxhost.space"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Web Hosting",
+            "item": "https://zeroxhost.space/webhosting"
+          }
+        ]
+      }} />
+      <WebHostingClient />
+    </>
+  );
 }

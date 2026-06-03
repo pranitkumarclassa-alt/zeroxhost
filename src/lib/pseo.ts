@@ -77,5 +77,49 @@ export const pseoPages: PSEOPage[] = [
     faqs: [
       { question: 'Is this better for Bangalore-based startups?', answer: 'Yes, our routing is optimized to provide the lowest latency to users in and around Karnataka.' }
     ]
+  },
+  {
+    slug: 'vps-hosting-kolkata',
+    title: 'Cheap VPS Hosting in Kolkata - East India Edge Nodes',
+    keyword: 'VPS Hosting Kolkata',
+    location: 'Kolkata',
+    description: 'Connect with East India and neighboring regions through our Kolkata edge nodes. High-speed VPS hosting with local peering and low latency.',
+    features: ['East India Strategic Node', 'Low Latency to neighboring countries', 'DDoS Protection', 'Instant Provisioning'],
+    faqs: [
+      { question: 'What is the connectivity like in Kolkata?', answer: 'Our Kolkata nodes are peered with major regional ISPs to ensure smooth connectivity across West Bengal and surrounding states.' }
+    ]
+  },
+  {
+    slug: 'vps-hosting-hyderabad',
+    title: 'Premium VPS Hosting in Hyderabad - Cyberabad Infrastructure',
+    keyword: 'VPS Hosting Hyderabad',
+    location: 'Hyderabad',
+    description: 'Host your business on our high-performance Hyderabad nodes. Located in the heart of Cyberabad, our servers offer unmatched reliability for enterprise applications.',
+    features: ['Cyberabad Tech Hub Node', 'Tier-III Facility', 'Redundant Power', 'Advanced Monitoring'],
+    faqs: [
+      { question: 'Do you offer managed services in Hyderabad?', answer: 'Yes, we provide both managed and unmanaged VPS options in our Hyderabad datacenter.' }
+    ]
+  },
+  {
+    slug: 'discord-bot-hosting-india',
+    title: 'Fast Discord Bot Hosting India - Node.js & Python Optimized',
+    keyword: 'Discord Bot Hosting India',
+    location: 'India',
+    description: 'Deploy your Discord bots on our low-latency India nodes. Optimized for Discord.js, Discord.py, and JDA with 24/7 uptime and instant setup.',
+    features: ['Optimized for Bot Latency', 'Pterodactyl Panel', 'Git Integration', 'Resource Monitoring'],
+    faqs: [
+      { question: 'Which languages do you support?', answer: 'We support all major languages including Node.js, Python, Java, Go, and Rust through our custom bot containers.' }
+    ]
+  },
+  {
+    slug: 'ryzen-vps-india',
+    title: 'AMD Ryzen 9 VPS India - Extreme Compute Performance',
+    keyword: 'Ryzen VPS India',
+    location: 'India',
+    description: 'Experience the power of AMD Ryzen 9 7950X processors in India. Perfect for high-tickrate game servers, heavy compilation, and resource-intensive apps.',
+    features: ['AMD Ryzen 9 7950X CPUs', '5.7GHz Boost Clock', 'DDR5 Memory', 'Gen4 NVMe Storage'],
+    faqs: [
+      { question: 'Is the CPU performance dedicated?', answer: 'Yes, our Ryzen VPS plans use high-frequency cores with minimal virtualization overhead for maximum performance.' }
+    ]
   }
 ];

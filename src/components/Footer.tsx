@@ -2,9 +2,24 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, MessageSquare, ShieldCheck, Activity } from 'lucide-react';
+import { Mail, MessageSquare, ShieldCheck, Activity, MapPin, Globe } from 'lucide-react';
 
 export default function Footer() {
+  const locations = [
+    { name: 'Mumbai', slug: 'vps-hosting-india' },
+    { name: 'Delhi', slug: 'vps-hosting-delhi' },
+    { name: 'Bangalore', slug: 'vps-hosting-bangalore' },
+    { name: 'Kolkata', slug: 'vps-hosting-kolkata' },
+    { name: 'Hyderabad', slug: 'vps-hosting-hyderabad' },
+  ];
+
+  const solutions = [
+    { name: 'Cheap VPS India', slug: 'cheap-vps-india' },
+    { name: 'Ryzen VPS', slug: 'ryzen-vps-india' },
+    { name: 'Minecraft Hosting', slug: 'minecraft-hosting-india' },
+    { name: 'Discord Bot Hosting', slug: 'discord-bot-hosting-india' },
+  ];
+
   return (
     <footer className="py-24 px-6 relative overflow-hidden bg-transparent">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -94,8 +109,62 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="text-gray-400 text-sm font-bold italic">Intel E5 v4 · Intel Platinum · Global POPs</div>
             <p className="text-gray-500 text-[10px] leading-relaxed uppercase tracking-wider font-bold">
-              We use only the latest Intel server hardware to ensure your VPS performance stays reliable and consistent.
+              We use only the latest Intel and AMD server hardware to ensure your performance stays reliable and consistent.
             </p>
+          </div>
+        </div>
+      </div>
+
+      {/* SEO Hub - New Section */}
+      <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+        <div>
+          <h5 className="text-white font-black uppercase tracking-widest text-[10px] mb-6 flex items-center gap-2">
+            <MapPin size={12} className="text-blue-500" />
+            Popular Locations
+          </h5>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {locations.map((loc) => (
+              <Link key={loc.slug} href={`/${loc.slug}`} className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">
+                {loc.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h5 className="text-white font-black uppercase tracking-widest text-[10px] mb-6 flex items-center gap-2">
+            <Globe size={12} className="text-blue-500" />
+            Hosting Solutions
+          </h5>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {solutions.map((sol) => (
+              <Link key={sol.slug} href={`/${sol.slug}`} className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">
+                {sol.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h5 className="text-white font-black uppercase tracking-widest text-[10px] mb-6 flex items-center gap-2">
+            <Activity size={12} className="text-blue-500" />
+            Resources
+          </h5>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <Link href="/knowledgebase" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Knowledge Base</Link>
+            <Link href="/glossary" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Glossary</Link>
+            <Link href="/status" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">System Status</Link>
+            <Link href="/datacenter" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Datacenters</Link>
+          </div>
+        </div>
+        <div>
+          <h5 className="text-white font-black uppercase tracking-widest text-[10px] mb-6 flex items-center gap-2">
+            <ShieldCheck size={12} className="text-blue-500" />
+            Legal & Trust
+          </h5>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <Link href="/terms" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Terms</Link>
+            <Link href="/privacy" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Privacy</Link>
+            <Link href="/refund" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">Refund Policy</Link>
+            <Link href="/sla" className="text-gray-500 hover:text-blue-500 text-xs font-bold transition-colors">SLA</Link>
           </div>
         </div>
       </div>

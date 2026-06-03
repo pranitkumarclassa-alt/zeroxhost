@@ -53,6 +53,24 @@ export default function Page() {
   return (
     <>
       <JsonLd data={serviceSchema} />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://zeroxhost.space"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Game Servers",
+            "item": "https://zeroxhost.space/games"
+          }
+        ]
+      }} />
       <GamesClient />
     </>
   );
