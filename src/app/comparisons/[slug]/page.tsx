@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, X, Minus, ChevronRight, Scale, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -39,8 +40,34 @@ export default async function ComparisonPage({ params }: Props) {
 
   const [option1, option2] = comparison.title.split(' vs ');
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeroxhost.space"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Comparisons",
+        "item": "https://zeroxhost.space/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": comparison.title,
+        "item": `https://zeroxhost.space/comparisons/${slug}`
+      }
+    ]
+  };
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
+      <JsonLd data={breadcrumbSchema} />
       <Navbar />
       
       <div className="relative z-10">

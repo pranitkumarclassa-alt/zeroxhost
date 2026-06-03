@@ -65,6 +65,37 @@ export default async function KBArticlePage({ params }: Props) {
     "dateModified": article.lastUpdated
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeroxhost.space"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Knowledge Base",
+        "item": "https://zeroxhost.space/knowledgebase"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": article.category,
+        "item": `https://zeroxhost.space/knowledgebase?category=${article.category}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": article.title,
+        "item": `https://zeroxhost.space/knowledgebase/${slug}`
+      }
+    ]
+  };
+
   const faqSchema = article.faqs ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -81,6 +112,7 @@ export default async function KBArticlePage({ params }: Props) {
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
       <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       {faqSchema && <JsonLd data={faqSchema} />}
       <Navbar />
       

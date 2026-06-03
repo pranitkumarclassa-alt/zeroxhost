@@ -55,5 +55,27 @@ export const pseoPages: PSEOPage[] = [
     faqs: [
       { question: 'Will my players experience lag?', answer: 'With our Mumbai nodes, players in India will experience minimal lag and smooth gameplay.' }
     ]
+  },
+  {
+    slug: 'vps-hosting-mumbai',
+    title: 'Low Latency VPS Hosting in Mumbai - Tier-IV Datacenter',
+    keyword: 'VPS Hosting Mumbai',
+    location: 'Mumbai',
+    description: 'Host your applications in the heart of India\'s financial capital. Our Mumbai VPS nodes offer the best peering with major Indian ISPs for unmatched performance.',
+    features: ['Mumbai Tier-IV Datacenter', 'Direct ISP Peering', '99.99% Uptime SLA', 'Hardware DDoS Protection'],
+    faqs: [
+      { question: 'Which datacenter do you use in Mumbai?', answer: 'We operate out of premium Tier-IV facilities in Mumbai, ensuring maximum redundancy and security.' }
+    ]
+  },
+  {
+    slug: 'vps-hosting-bangalore',
+    title: 'High-Performance VPS Hosting in Bangalore - Tech Hub Nodes',
+    keyword: 'VPS Hosting Bangalore',
+    location: 'Bangalore',
+    description: 'Perfect for startups and developers in India\'s Silicon Valley. Our Bangalore-optimized nodes provide lightning-fast access to local tech ecosystems.',
+    features: ['Optimized for Bangalore Latency', 'Developer-First Platform', 'Scalable NVMe Storage', '24/7 Tech Support'],
+    faqs: [
+      { question: 'Is this better for Bangalore-based startups?', answer: 'Yes, our routing is optimized to provide the lowest latency to users in and around Karnataka.' }
+    ]
   }
 ];

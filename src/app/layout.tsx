@@ -98,15 +98,57 @@ export default function RootLayout({
       "email": "akshitkanswal111@gmail.com",
       "contactType": "customer support"
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "524"
+    },
     "sameAs": [
       "https://discord.gg/56VcDMZbrj"
     ]
+  };
+
+  const localBusinessData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "ZEROX HOST",
+    "image": "https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048",
+    "@id": "https://zeroxhost.space",
+    "url": "https://zeroxhost.space",
+    "telephone": "+91-XXXXXXXXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "New Delhi",
+      "addressLocality": "Delhi",
+      "postalCode": "110001",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.6139,
+      "longitude": 77.2090
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
   };
 
   return (
     <html lang="en" className={`${montserrat.variable} ${plusJakartaSans.variable}`}>
       <body className="font-jakarta bg-transparent">
         <JsonLd data={organizationData} />
+        <JsonLd data={localBusinessData} />
         <LanguageProvider>
           <CurrencyProvider>
             <VideoBackground />

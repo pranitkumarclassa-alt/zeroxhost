@@ -71,10 +71,30 @@ export default async function PSEOPage({ params }: Props) {
     }
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeroxhost.space"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": page.keyword,
+        "item": `https://zeroxhost.space/${slug}`
+      }
+    ]
+  };
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 bg-transparent">
       <JsonLd data={faqSchema} />
       <JsonLd data={productSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar />
       
       <div className="relative z-10">
