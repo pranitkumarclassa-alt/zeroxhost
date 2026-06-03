@@ -6,8 +6,11 @@ import { blogCategories, blogPosts } from '@/lib/blogs';
 import { ArrowRight, BookOpen, Clock, Layers, Search } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Blog | ZEROX HOST',
-  description: 'VPS, Minecraft hosting, web hosting, and developer guides from ZEROX HOST.',
+  title: 'Hosting Blog & Guides | ZEROX HOST',
+  description: 'In-depth tutorials and guides for VPS, Minecraft servers, Web Hosting, and DevOps workflows from ZEROX HOST.',
+  alternates: {
+    canonical: '/blog',
+  },
 };
 
 const featuredPosts = blogPosts.filter((post) => post.featured);

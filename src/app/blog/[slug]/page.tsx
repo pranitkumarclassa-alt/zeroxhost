@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blogs';
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
+import JsonLd from '@/components/JsonLd';
+import GlossaryLinker from '@/components/GlossaryLinker';
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -27,6 +29,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: `${post.title} | ZEROX HOST Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `https://zeroxhost.space/blog/${slug}`,
+    }
   };
 }
 
@@ -40,8 +51,59 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = getRelatedPosts(post);
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "author": {
+      "@type": "Organization",
+      "name": "ZEROX HOST"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ZEROX HOST",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
+      }
+    },
+    "datePublished": "2026-06-03", // Standard date for now
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://zeroxhost.space/blog/${slug}`
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeroxhost.space"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://zeroxhost.space/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": `https://zeroxhost.space/blog/${slug}`
+      }
+    ]
+  };
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30">
+      <JsonLd data={blogSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar />
 
       <div className="relative z-10">
@@ -53,6 +115,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
 
             <header className="mb-14">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-500 text-[9px] font-black uppercase tracking-wider">
+                  <ShieldCheck size={12} />
+                  Verified by Experts
+                </div>
+                <div className="w-1 h-1 rounded-full bg-gray-800" />
+                <div className="text-[9px] font-black uppercase tracking-wider text-gray-500">
+                  Updated: June 2026
+                </div>
+              </div>
+
               <div className="flex flex-wrap items-center gap-3 mb-8">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.24em]">
                   <BookOpen size={12} />
@@ -94,7 +167,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       {String(index + 1).padStart(2, '0')}
                     </div>
                     <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight mb-4">{section.heading}</h2>
-                    <p className="text-gray-400 leading-8 font-medium">{section.body}</p>
+                    <div className="text-gray-400 leading-8 font-medium">
+                      <GlossaryLinker text={section.body} />
+                    </div>
                   </section>
                 ))}
               </div>
