@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 import WhyZerox from '@/components/WhyZerox';
+import Reviews from '@/components/Reviews';
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
         <Hero />
         <Features />
         <WhyZerox />
+        <Pricing />
+        <Calculator />
+        <Reviews />
         <AdvancedFeatures />
         <Locations />
         <Footer />

@@ -38,6 +38,8 @@ export default function Navbar() {
     { name: 'VDS Hosting', desc: t('nav.vdsHostingDesc'), icon: Layers, href: '/vds' },
     { name: 'Web Hosting', desc: t('nav.webHostingDesc'), icon: Globe, href: '/webhosting' },
     { name: 'Bot Hosting', desc: t('nav.botHostingDesc'), icon: Bot, href: '/bots' },
+    { name: 'Network', desc: 'Live system status', icon: Activity, href: '/network' },
+    { name: 'Knowledge Base', desc: 'Tutorials & guides', icon: BookOpen, href: '/knowledgebase' },
     { name: 'Blog', desc: 'Hosting guides', icon: BookOpen, href: '/blog' },
   ];
 
@@ -317,9 +319,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-4">
               <Link
-                href="https://discord.com/invite/56VcDMZbrj"
-                target="_blank"
-                rel="noreferrer noopener"
+                href="https://panel.zeroxhost.space/auth/login"
                 className="px-8 py-3 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:bg-blue-700 shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-105 active:scale-95"
               >
                 Client Area
@@ -460,11 +460,11 @@ export default function Navbar() {
                   </div>
                 </div>
                 <Link
-                  href="/login"
+                  href="https://panel.zeroxhost.space/auth/login"
                   className="w-full py-4 rounded-xl bg-blue-600 text-white text-center text-xs font-black uppercase tracking-[0.2em]"
                   onClick={() => setIsOpen(false)}
                 >
-                  Login to Portal
+                  Client Area
                 </Link>
               </div>
             </div>
