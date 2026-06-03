@@ -6,8 +6,17 @@ import Pricing from '@/components/Pricing';
 import HexiumFeatures from '@/components/HexiumFeatures';
 import Footer from '@/components/Footer';
 import { Bot } from 'lucide-react';
+import ComparisonSummary from '@/components/ComparisonSummary';
 
 export default function BotsPage() {
+  const botsComparison = [
+    { feature: 'Setup Time', us: 'Instant (< 60s)', them: 'Manual / Delayed', better: true },
+    { feature: 'Uptime Guarantee', us: '99.99%', them: '99.0% / Unspecified', better: true },
+    { feature: 'Languages', us: 'All Major Support', them: 'Node.js Only', better: true },
+    { feature: 'Auto-Restart', us: 'Native Integrated', them: 'Script-based', better: true },
+    { feature: 'Control Panel', us: 'Custom Pterodactyl', them: 'Basic SSH', better: true },
+  ];
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30">
       <Navbar />
@@ -23,6 +32,11 @@ export default function BotsPage() {
         
         <HexiumFeatures />
         <Pricing initialCategory="bots" hideTabs={true} />
+        
+        <ComparisonSummary 
+          title="Bot Hosting Comparison" 
+          items={botsComparison} 
+        />
         
         <Footer />
       </div>

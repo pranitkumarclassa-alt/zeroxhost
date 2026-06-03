@@ -78,22 +78,22 @@ export default function Navbar() {
   return (
     <nav 
       className={cn(
-        "sticky top-0 left-0 right-0 z-[100] transition-all duration-500 px-6",
-        scrolled ? "py-4" : "py-6"
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6",
+        scrolled ? "py-4" : "py-8"
       )}
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <div 
           className={cn(
-            "relative flex items-center justify-between px-8 py-3 rounded-full transition-all duration-500 border",
+            "relative flex items-center justify-between px-8 py-3.5 rounded-[2rem] transition-all duration-500 border backdrop-blur-2xl",
             scrolled 
-              ? "bg-black/80 backdrop-blur-2xl border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
-              : "bg-black/40 backdrop-blur-xl border-white/5 shadow-2xl"
+              ? "bg-[#05050a]/80 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
+              : "bg-white/[0.02] border-white/5 shadow-2xl"
           )}
         >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-4 group">
-            <div className="relative h-12 w-12 rounded-2xl overflow-hidden group-hover:scale-110 transition-all duration-500 border border-white/10 group-hover:border-blue-500/50">
+            <div className="relative h-11 w-11 rounded-2xl overflow-hidden group-hover:scale-110 transition-all duration-500 border border-white/10 group-hover:border-blue-500/50 shadow-[0_0_20px_rgba(0,0,0,0.4)]">
               <Image
                 src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
                 alt="ZEROX HOST - Premium India Hosting Logo"
@@ -103,25 +103,25 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-black text-white tracking-tighter leading-tight font-montserrat uppercase">ZEROX<span className="text-blue-500">HOST</span></span>
-              <span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.3em] leading-none font-jakarta">Supreme Infrastructure</span>
+              <span className="text-xl font-black text-white tracking-tighter leading-tight font-montserrat uppercase">ZEROX<span className="text-blue-500">HOST</span></span>
+              <span className="text-[8px] font-black text-gray-500 uppercase tracking-[0.4em] leading-none font-jakarta">Elite Cloud</span>
             </div>
           </Link>
 
           {/* Centered Nav Links */}
-          <div className="hidden lg:flex items-center gap-3 min-w-0 flex-nowrap">
+          <div className="hidden lg:flex items-center gap-1.5 min-w-0 flex-nowrap bg-white/[0.03] border border-white/5 rounded-full p-1.5 backdrop-blur-md">
             <div 
               className="relative group/hosting h-full flex items-center"
               onMouseEnter={() => setActiveDropdown('hosting')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button className={cn(
-                "flex items-center gap-2 rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
+                "flex items-center gap-2 rounded-full px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
                 activeDropdown === 'hosting' 
-                  ? "bg-blue-600/20 border-blue-500/50 text-white shadow-[0_0_20px_rgba(37,99,235,0.2)]" 
-                  : "bg-white/5 border-white/10 text-gray-300 hover:border-blue-400/50 hover:text-white hover:bg-white/10"
+                  ? "bg-blue-600/20 text-white" 
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
               )}>
-                <Server size={12} className="text-blue-500" /> Hosting Services <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'hosting' && "rotate-180")} />
+                Services <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'hosting' && "rotate-180")} />
               </button>
               
               <AnimatePresence>
@@ -130,24 +130,23 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 12, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[520px] z-[110]"
+                    className="absolute top-full left-0 pt-4 w-[560px] z-[110]"
                   >
-                    <div className="bg-[#05050a]/95 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.6)] grid grid-cols-2 gap-4 relative">
-                      {/* Decorative Glow inside dropdown */}
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+                    <div className="bg-[#05050a]/98 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-6 shadow-[0_40px_100px_rgba(0,0,0,0.8)] grid grid-cols-2 gap-3 relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400" />
                       
-                      {hostingDropdown.map((item) => (
+                      {hostingServices.slice(0, 6).map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="flex items-center gap-4 p-5 rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/30 group/item"
+                          className="flex items-center gap-4 p-4 rounded-[1.5rem] bg-white/[0.02] border border-white/5 transition-all duration-300 hover:bg-blue-600/10 hover:border-blue-500/30 group/item"
                         >
-                          <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:scale-110 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
-                            <item.icon size={20} />
+                          <div className="w-11 h-11 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:scale-110 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300 shadow-inner">
+                            <item.icon size={18} />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">{item.name}</span>
-                            <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-0.5 group-hover/item:text-blue-400/70 transition-colors">Enterprise Grade</span>
+                            <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white">{item.name}</span>
+                            <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-1 group-hover/item:text-blue-400/70 transition-colors line-clamp-1">{item.desc}</span>
                           </div>
                         </Link>
                       ))}
@@ -164,15 +163,14 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "group relative overflow-hidden rounded-full px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 nav-pill",
+                    "group relative overflow-hidden rounded-full px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
                     active 
-                      ? 'text-white bg-blue-600/20 border border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.25)]' 
-                      : 'text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/20 border border-transparent'
+                      ? 'text-white bg-blue-600/20' 
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
                   )}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-violet-500/5 to-cyan-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span className="relative z-10 flex items-center gap-2">
-                    <item.icon size={14} className={cn("transition-colors duration-300", active ? "text-blue-400" : "text-gray-500 group-hover:text-blue-400")} /> {item.name}
+                    {item.name}
                   </span>
                 </Link>
               );
@@ -184,12 +182,12 @@ export default function Navbar() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button className={cn(
-                "flex items-center gap-2 rounded-full border px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
+                "flex items-center gap-2 rounded-full px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300",
                 activeDropdown === 'company' 
-                  ? "bg-blue-600/20 border-blue-500/50 text-white shadow-[0_0_20px_rgba(37,99,235,0.2)]" 
-                  : "bg-white/5 border-white/10 text-gray-300 hover:border-blue-400/50 hover:text-white hover:bg-white/10"
+                  ? "bg-blue-600/20 text-white" 
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
               )}>
-                <Layers size={12} className="text-blue-500" /> Company <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'company' && "rotate-180")} />
+                Explore <ChevronDown size={10} className={cn("transition-transform duration-300", activeDropdown === 'company' && "rotate-180")} />
               </button>
               
               <AnimatePresence>
@@ -198,19 +196,19 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 12, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[240px] z-[110]"
+                    className="absolute top-full left-0 pt-4 w-[240px] z-[110]"
                   >
-                    <div className="bg-[#05050a]/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 shadow-[0_40px_100px_rgba(0,0,0,0.6)] flex flex-col gap-1 relative">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+                    <div className="bg-[#05050a]/98 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-3 shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col gap-1 relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-500" />
                       
                       {companyDropdown.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
                           target={item.href.startsWith('http') ? '_blank' : undefined}
-                          className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/30 group/item"
+                          className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/30 group/item"
                         >
-                          <div className="w-8 h-8 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:scale-110 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
+                          <div className="w-8 h-8 rounded-lg bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
                             <item.icon size={14} />
                           </div>
                           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">{item.name}</span>
@@ -224,30 +222,69 @@ export default function Navbar() {
           </div>
 
           {/* Right Side Actions */}
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-4 relative">
-              <Link href="https://discord.gg/56VcDMZbrj" target="_blank" rel="noreferrer noopener" className="text-gray-400 hover:text-white transition-colors">
-                <MessageSquare size={18} />
-              </Link>
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Language & Currency in one sleek group */}
+            <div className="flex items-center gap-2 bg-white/[0.03] border border-white/5 rounded-full px-4 py-1.5 backdrop-blur-md">
+              <div 
+                className="relative group/lang"
+                onMouseEnter={() => setActiveDropdown('lang')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button className="flex items-center gap-1.5 text-[10px] font-black text-gray-400 hover:text-white transition-all uppercase tracking-widest py-1">
+                  {languages.find(l => l.code === language)?.code.toUpperCase()}
+                  <ChevronDown size={10} className="text-blue-500" />
+                </button>
 
-              {/* Language & Currency in one sleek group */}
-              <div className="flex items-center gap-3 bg-white/5 border border-white/5 rounded-2xl px-4 py-2">
-                {/* Language Switcher */}
-                <div 
-                  className="relative group/lang"
-                  onMouseEnter={() => setActiveDropdown('lang')}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  <button
-                    className="flex items-center gap-1.5 text-[10px] font-black text-gray-300 hover:text-white transition-all uppercase tracking-widest py-1"
-                  >
-                    <span>{languages.find(l => l.code === language)?.code.toUpperCase()}</span>
-                    <ChevronDown size={10} className="text-blue-500" />
-                  </button>
+                <AnimatePresence>
+                  {activeDropdown === 'lang' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute top-full right-0 pt-4 w-[160px] z-[120]"
+                    >
+                      <div className="bg-[#05050a]/98 backdrop-blur-3xl border border-white/10 rounded-2xl p-2 shadow-2xl overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-0.5 bg-blue-600" />
+                        {languages.map((lang) => (
+                          <button
+                            key={lang.code}
+                            onClick={() => {
+                              setLanguage(lang.code);
+                              setActiveDropdown(null);
+                            }}
+                            className={cn(
+                              "w-full flex items-center justify-between px-4 py-2.5 rounded-xl transition-all text-[10px] font-black uppercase tracking-widest",
+                              language === lang.code ? "bg-blue-600 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
+                            )}
+                          >
+                            <span>{lang.label}</span>
+                            <span>{lang.flag}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-                  <AnimatePresence>
-                    {activeDropdown === 'lang' && (
-                      <motion.div
+              <div className="w-px h-3 bg-white/10" />
+
+              <button
+                onClick={() => setCurrency(currency === 'INR' ? 'USD' : 'INR')}
+                className="text-[10px] font-black text-gray-400 hover:text-white transition-all uppercase tracking-widest py-1 flex items-center gap-1.5"
+              >
+                {currency}
+                <div className="w-1 h-1 rounded-full bg-blue-500" />
+              </button>
+            </div>
+
+            <Link
+              href="https://panel.zeroxhost.space/auth/login"
+              className="px-8 py-3.5 rounded-full bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.25em] transition-all hover:bg-blue-700 shadow-[0_0_40px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 border border-blue-400/30"
+            >
+              Client Area
+            </Link>
+          </div>
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
@@ -341,130 +378,126 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden absolute top-full left-0 right-0 mt-4 mx-6 p-8 bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-2xl"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[120] lg:hidden"
           >
-            <div className="grid gap-8">
-              <div>
-                <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-6 ml-2">Services</div>
-                <div className="grid grid-cols-1 gap-2">
-                  {hostingServices.map((service) => (
-                    <Link
-                      key={service.name}
-                      href={service.href}
-                      className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <service.icon size={20} className="text-blue-500" />
-                      <span className="text-sm font-bold text-white uppercase tracking-wider">{service.name}</span>
-                    </Link>
-                  ))}
+            <div className="absolute inset-0 bg-[#05050a]/95 backdrop-blur-3xl" />
+            
+            <div className="relative h-full flex flex-col p-8 overflow-y-auto font-jakarta">
+              <div className="flex items-center justify-between mb-12">
+                <div className="flex items-center gap-3">
+                  <div className="relative h-10 w-10 rounded-xl overflow-hidden border border-white/10">
+                    <Image
+                      src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
+                      alt="Logo"
+                      fill
+                      unoptimized
+                    />
+                  </div>
+                  <span className="text-lg font-black text-white uppercase tracking-tighter">ZEROX<span className="text-blue-500">HOST</span></span>
                 </div>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-blue-600 transition-all shadow-inner"
+                >
+                  <X size={20} />
+                </button>
               </div>
 
-              <div>
-                <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-6 ml-2">Explore</div>
-                <div className="grid grid-cols-1 gap-2">
-                  {[
-                    { name: 'Pricing', href: '/pricing', icon: Activity },
-                    { name: 'Deals', href: '/pricing?category=deals', icon: Zap },
-                    { name: 'Partners', href: '/partners', icon: Handshake },
-                    { name: 'Blog', href: '/blog', icon: BookOpen },
-                  ].map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <item.icon size={20} className="text-blue-500" />
-                      <span className="text-sm font-bold text-white uppercase tracking-wider">{item.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-6 ml-2">Partners</div>
-                <div className="grid grid-cols-1 gap-2">
-                  {partnerLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <link.icon size={20} className="text-blue-500" />
-                      <span className="text-sm font-bold text-white uppercase tracking-wider">{link.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] mb-6 ml-2">{t('nav.legal')}</div>
-                <div className="grid grid-cols-1 gap-2">
-                  <Link
-                    href={legalLink.href}
-                    className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FileText size={20} className="text-blue-500" />
-                    <span className="text-sm font-bold text-white uppercase tracking-wider">{legalLink.name}</span>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-6 pt-6 border-t border-white/10">
-                <div className="space-y-4 px-2">
-                  <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Language</span>
-                  <div className="grid grid-cols-5 gap-2">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setIsOpen(false);
-                        }}
-                        className={cn(
-                          "px-2 py-2 rounded-xl text-[9px] font-black transition-all w-full",
-                          language === lang.code ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]" : "bg-white/5 text-gray-500 hover:text-gray-300"
-                        )}
+              <div className="flex-1 space-y-12">
+                <div className="space-y-4">
+                  <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] px-2 block">Hosting Solutions</span>
+                  <div className="grid grid-cols-1 gap-2">
+                    {hostingServices.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-blue-600/10 hover:border-blue-500/30 transition-all group"
                       >
-                        {lang.code.toUpperCase()}
-                      </button>
+                        <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                          <item.icon size={18} />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-white">{item.name}</span>
+                          <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-0.5 line-clamp-1">{item.desc}</span>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
 
-                <div className="space-y-4 px-2">
-                  <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Currency</span>
+                <div className="space-y-4">
+                  <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] px-2 block">Quick Access</span>
                   <div className="grid grid-cols-2 gap-2">
-                    {(['INR', 'USD'] as const).map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => {
-                          setCurrency(c);
-                          setIsOpen(false);
-                        }}
-                        className={cn(
-                          "px-2 py-2 rounded-xl text-[9px] font-black transition-all w-full",
-                          currency === c ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]" : "bg-white/5 text-gray-500 hover:text-gray-300"
-                        )}
+                    {navItems.concat(companyDropdown.slice(0, 2)).map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all"
                       >
-                        {c}
-                      </button>
+                        <item.icon size={14} className="text-blue-500" />
+                        <span className="text-[10px] font-black uppercase tracking-wider text-white">{item.name}</span>
+                      </Link>
                     ))}
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-auto pt-8 border-t border-white/10 space-y-8">
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Language</span>
+                    <div className="grid grid-cols-3 gap-1">
+                      {languages.slice(0, 3).map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setLanguage(lang.code);
+                            setIsOpen(false);
+                          }}
+                          className={cn(
+                            "py-2.5 rounded-lg text-[9px] font-black transition-all",
+                            language === lang.code ? "bg-blue-600 text-white" : "bg-white/5 text-gray-500"
+                          )}
+                        >
+                          {lang.code.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Currency</span>
+                    <div className="flex gap-1">
+                      {(['INR', 'USD'] as const).map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => {
+                            setCurrency(c);
+                            setIsOpen(false);
+                          }}
+                          className={cn(
+                            "flex-1 py-2.5 rounded-lg text-[9px] font-black transition-all",
+                            currency === c ? "bg-blue-600 text-white" : "bg-white/5 text-gray-500"
+                          )}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 <Link
                   href="https://panel.zeroxhost.space/auth/login"
-                  className="w-full py-4 rounded-xl bg-blue-600 text-white text-center text-xs font-black uppercase tracking-[0.2em]"
+                  className="w-full py-5 rounded-2xl bg-blue-600 text-white text-center text-xs font-black uppercase tracking-[0.25em] shadow-[0_0_30px_rgba(37,99,235,0.3)] border border-blue-400/30"
                   onClick={() => setIsOpen(false)}
                 >
-                  Client Area
+                  Access Client Area
                 </Link>
               </div>
             </div>

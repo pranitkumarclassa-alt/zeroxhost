@@ -1,7 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import AdvancedFeatures from '@/components/AdvancedFeatures';
 import Locations from '@/components/Locations';
 import Pricing from '@/components/Pricing';
 import Calculator from '@/components/Calculator';
@@ -13,6 +11,7 @@ import Reviews from '@/components/Reviews';
 import FAQ from '@/components/FAQ';
 import FAQSchema from '@/components/FAQSchema';
 import HardwareShowcase from '@/components/HardwareShowcase';
+import HostingServices from '@/components/HostingServices';
 
 export default function Home() {
   return (
@@ -38,14 +37,13 @@ export default function Home() {
         <AnnouncementBanner />
         <Navbar />
         <Hero />
-        <Features />
+        <HostingServices />
         <WhyZerox />
         <HardwareShowcase />
         <Pricing />
         <Calculator />
         <Reviews />
         <FAQ />
-        <AdvancedFeatures />
         <Locations />
         <Footer />
       </div>
