@@ -16,6 +16,12 @@ export type KBArticle = {
     question: string;
     answer: string;
   }[];
+  relatedSlugs?: string[];
+  author?: {
+    name: string;
+    role: string;
+    image?: string;
+  };
 };
 
 export const kbCategories: { name: KBCategory; icon: string; desc: string }[] = [
@@ -55,7 +61,12 @@ export const kbArticles: KBArticle[] = [
         question: 'Does Docker work on all VPS plans?',
         answer: 'Yes, Docker works on all our KVM VPS plans. It is not recommended for LXC containers due to kernel limitations.'
       }
-    ]
+    ],
+    relatedSlugs: ['how-to-secure-ssh-access'],
+    author: {
+      name: 'Akshit Kanswal',
+      role: 'Head of Infrastructure'
+    }
   },
   {
     slug: 'how-to-secure-ssh-access',
@@ -74,7 +85,12 @@ export const kbArticles: KBArticle[] = [
         heading: 'Disable Password Authentication',
         body: 'Using SSH keys is significantly more secure than passwords. Once your keys are set up, disable password login in /etc/ssh/sshd_config.'
       }
-    ]
+    ],
+    relatedSlugs: ['how-to-install-docker-on-ubuntu'],
+    author: {
+      name: 'Harshvardhan S.',
+      role: 'Chief Security Officer'
+    }
   }
   // More articles can be added here
 ];

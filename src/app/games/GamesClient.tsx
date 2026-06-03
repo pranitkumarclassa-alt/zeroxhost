@@ -9,6 +9,7 @@ import { Gamepad2, Zap, Shield, Server, MessageSquare, Layers, Globe, Bot, Activ
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import ComparisonSummary from '@/components/ComparisonSummary';
 
 const gamesList = [
   { name: 'Minecraft', href: '/games/minecraft', icon: Gamepad2, desc: 'High-tick Java & Bedrock hosting.', image: 'https://i.pinimg.com/originals/ab/be/8f/abbe8fde3c7ab201c38e66b03b163e2c.gif' },
@@ -24,6 +25,14 @@ const gamesList = [
 ];
 
 export default function GamesClient() {
+  const gameComparison = [
+    { feature: 'Processor', us: 'Ryzen 9 7950X', them: 'Intel Core i7/i9 (Older)', better: true },
+    { feature: 'Memory', us: 'DDR5 5200MHz', them: 'DDR4 2666MHz', better: true },
+    { feature: 'Storage', us: 'NVMe Gen4', them: 'SATA SSD', better: true },
+    { feature: 'Network', us: 'Global Peering', them: 'Standard Routing', better: true },
+    { feature: 'Panel', us: 'Custom Pterodactyl', them: 'Multicraft', better: true },
+  ];
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30">
       <Navbar />
@@ -81,6 +90,11 @@ export default function GamesClient() {
 
         <HexiumFeatures />
         <Pricing initialCategory="games" hideTabs={true} />
+        
+        <ComparisonSummary 
+          title="Game Server Comparison" 
+          items={gameComparison} 
+        />
         
         <Footer />
       </div>
