@@ -76,7 +76,7 @@ const mainCategories = [
     name: 'Cloud VPS', 
     icon: Server,
     description: 'ENTERPRISE-GRADE VIRTUAL PRIVATE SERVERS WITH DEDICATED RESOURCES, ROOT ACCESS & ULTRA-LOW LATENCY INDIA NODES.',
-    banner: '⚡ KVM-VIRTUALIZED VPS — AMD EPYC 7003 & NVME STORAGE IN MUMBAI.'
+    banner: '⚡ KVM-VIRTUALIZED VPS — Intel e5 v4 & NVME STORAGE IN MUMBAI.'
   },
   { 
     id: 'bots', 

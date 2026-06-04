@@ -7,9 +7,9 @@ import { useCurrency } from '@/lib/CurrencyContext';
 import { getSettings } from '@/app/actions';
 
 export default function Calculator() {
-  const [ram, setRam] = useState(4);
-  const [cpu, setCpu] = useState(2);
-  const [ssd, setSsd] = useState(50);
+  const [ram, setRam] = useState(64);
+  const [cpu, setCpu] = useState(16);
+  const [ssd, setSsd] = useState(500);
   const [totalPrice, setTotalPrice] = useState(0);
   const [prices, setPrices] = useState({
     basePrice: 50,

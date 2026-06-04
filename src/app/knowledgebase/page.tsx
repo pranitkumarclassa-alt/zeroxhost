@@ -47,8 +47,8 @@ export default function KnowledgeBasePage() {
       <div className="relative z-10">
         <SubpageHero 
           category="Support Center"
-          title="Nexus Knowledge"
-          subtitle="Base"
+          title="ZeroX"
+          subtitle="Knowledge Base"
           description="Access over 100+ tutorials and guides to help you manage your hosting environment effectively."
           icon={BookOpen}
         />

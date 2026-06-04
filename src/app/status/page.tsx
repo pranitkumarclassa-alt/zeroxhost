@@ -15,7 +15,7 @@ const services = [
 
 const nodes = [
   { name: 'IN-MUM-01', location: 'Mumbai, India', type: 'AMD Ryzen 9', status: 'operational', load: '12%' },
-  { name: 'IN-MUM-02', location: 'Mumbai, India', type: 'AMD EPYC 7003', status: 'operational', load: '45%' },
+  { name: 'IN-MUM-02', location: 'Mumbai, India', type: 'Intel e5 v4', status: 'operational', load: '45%' },
   { name: 'IN-DEL-01', location: 'Delhi, India', type: 'AMD Ryzen 9', status: 'operational', load: '28%' },
   { name: 'US-NYC-01', location: 'New York, USA', type: 'Intel Xeon', status: 'operational', load: '15%' },
   { name: 'EU-FRA-01', location: 'Frankfurt, Germany', type: 'AMD EPYC', status: 'maintenance', load: '0%' },
