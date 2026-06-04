@@ -276,10 +276,8 @@ export default function AdminDashboard() {
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-ping" />
                 <span className="text-[10px] font-black text-green-500 uppercase tracking-[0.3em]">System Online</span>
               </div>
-              <h1 className="text-4xl font-black tracking-tight flex items-center gap-3">
-                Nexus <span className="text-blue-500">Control</span>
-              </h1>
-              <p className="text-gray-500 font-bold tracking-[0.3em] uppercase text-[10px]">Administrative Intelligence Interface</p>
+              <h1 className="text-xl font-black text-white uppercase tracking-tighter">ZEROX<span className="text-blue-500">HOST</span></h1>
+              <p className="text-[8px] font-black text-gray-500 uppercase tracking-[0.4em] leading-none mt-1">Management</p>
             </div>
           </div>
           

@@ -69,8 +69,12 @@ export default function LoginPage() {
               priority
             />
           </motion.div>
-          <h1 className="text-4xl font-black text-white tracking-tight">Admin <span className="text-blue-500">Access</span></h1>
-          <p className="text-gray-500 mt-3 font-bold tracking-[0.3em] uppercase text-[10px]">Secure Infrastructure Portal</p>
+          <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
+            ZEROX<span className="text-blue-500">HOST</span>
+          </h1>
+          <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.3em] mt-2">
+            Supreme Admin Portal
+          </p>
         </div>
 
         <motion.div

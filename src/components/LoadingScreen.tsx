@@ -7,8 +7,7 @@ import Image from 'next/image';
 const LOG_MESSAGES = [
   "Initializing neural core...",
   "Establishing secure handshake...",
-  "Syncing Mumbai-1 datacenter...",
-  "Syncing Delhi-1 datacenter...",
+  "Syncing ZeroXHost Cloud...",
   "Calibrating NVMe Gen4 arrays...",
   "Loading enterprise DDoS filters...",
   "Optimizing packet routing...",
@@ -127,7 +126,7 @@ export default function LoadingScreen() {
                 <div className="relative w-full h-full overflow-hidden rounded-[2.2rem]">
                   <Image
                     src="https://cdn.discordapp.com/icons/1504088095220568094/2bf6ee2d2f71b5f3c631ad01556207d8.webp?size=2048"
-                    alt="Zerox Host"
+                    alt="ZeroXHost"
                     fill
                     unoptimized
                     className="object-cover scale-110"

@@ -104,12 +104,14 @@ export default function HostingServices() {
                     </span>
                   </div>
 
-                  <h3 className="text-3xl font-black text-white mb-6 group-hover:text-blue-400 transition-colors tracking-tight">{service.title}</h3>
-                  <p className="text-gray-500 text-sm font-bold leading-relaxed mb-10 group-hover:text-gray-400 transition-colors">{service.desc}</p>
+                  <h3 className="text-4xl font-black text-white mb-6 group-hover:text-blue-400 transition-colors tracking-tighter">{service.title}</h3>
+                  <p className="text-gray-500 text-lg font-bold leading-relaxed mb-10 group-hover:text-gray-400 transition-colors">{service.desc}</p>
 
-                  <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.25em]">
-                    <span className="text-blue-500">View Plans</span>
-                    <ArrowRight size={16} className="text-gray-700 group-hover:text-white group-hover:translate-x-2 transition-all" />
+                  <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-[0.3em] border-t border-white/5 pt-8">
+                    <span className="text-blue-500">Configure Node</span>
+                    <div className="flex items-center gap-2 text-gray-500 group-hover:text-white transition-colors">
+                      Deploy <ArrowRight size={16} className="group-hover:translate-x-2 transition-all" />
+                    </div>
                   </div>
                 </div>
               </Link>

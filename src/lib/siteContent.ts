@@ -19,7 +19,7 @@ export const termsSections = [
   {
     title: '1. Acceptance of Terms',
     content:
-      'By accessing and using Zerox Host, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use our services.',
+      'By accessing and using ZeroXHost, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use our services.',
   },
   {
     title: '2. Service Usage',
@@ -29,7 +29,7 @@ export const termsSections = [
   {
     title: '3. Account Security',
     content:
-      'You are responsible for maintaining the confidentiality of your account credentials. Zerox Host will not be liable for any loss or damage arising from your failure to comply with this security obligation.',
+      'You are responsible for maintaining the confidentiality of your account credentials. ZeroXHost will not be liable for any loss or damage arising from your failure to comply with this security obligation.',
   },
   {
     title: '4. Payments and Billing',

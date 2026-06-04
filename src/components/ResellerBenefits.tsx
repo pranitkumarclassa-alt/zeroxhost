@@ -49,7 +49,14 @@ export default function ResellerBenefits() {
           >
             Business Growth
           </motion.div>
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter font-montserrat">Reseller <span className="text-blue-500">Program</span></h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black text-white mb-6"
+          >
+            Scale with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">ZeroXHost</span>
+          </motion.h2>
           <p className="text-gray-500 max-w-2xl mx-auto font-medium text-lg">Everything you need to start your own hosting company today.</p>
         </div>
 
